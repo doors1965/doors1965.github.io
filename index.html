@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영어 단어 Quiz Hub — doors1965</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Serif+Display&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#F7F5F0;--ink:#1A1A2E;--ink2:#4A4A6A;--ink3:#8888AA;
+  --acc:#1A3A5C;--line:#E0DDD8;--card:#FFFFFF;
+}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;}
+
+/* ── Header ── */
+.header{background:var(--acc);padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.05);}
+.header::after{content:'';position:absolute;bottom:-40px;left:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04);}
+.header-label{font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-bottom:.5rem;}
+.header-title{font-family:'DM Serif Display',serif;font-size:2rem;color:#fff;margin-bottom:.4rem;line-height:1.2;}
+.header-sub{font-size:13px;color:rgba(255,255,255,.6);}
+
+/* ── Main ── */
+.main{max-width:720px;margin:0 auto;padding:2rem 1rem 3rem;}
+
+/* ── School block ── */
+.school-block{margin-bottom:2rem;}
+.school-header{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.75rem 1rem;
+  background:var(--acc);
+  border-radius:10px;
+  margin-bottom:1rem;
+}
+.school-icon{font-size:18px;}
+.school-title{font-size:15px;font-weight:700;color:#fff;letter-spacing:.3px;}
+
+/* ── Grade accordion button ── */
+.grade-btn{
+  width:100%;
+  display:flex;align-items:center;gap:.85rem;
+  padding:.9rem 1.1rem;
+  border:none;cursor:pointer;
+  border-radius:10px;
+  margin-bottom:.5rem;
+  transition:all .2s;
+  text-align:left;
+  position:relative;
+}
+.grade-btn:hover{filter:brightness(.95);}
+.grade-btn.open{border-radius:10px 10px 0 0;margin-bottom:0;}
+
+.grade-icon-wrap{
+  width:40px;height:40px;
+  border-radius:10px;
+  background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.grade-label{flex:1;}
+.grade-label-main{font-size:14px;font-weight:700;color:#fff;}
+.grade-label-sub{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px;}
+.grade-count{
+  font-size:11px;font-weight:600;
+  padding:3px 9px;border-radius:20px;
+  background:rgba(255,255,255,.2);
+  color:#fff;
+  flex-shrink:0;
+}
+.grade-arrow{
+  font-size:13px;color:rgba(255,255,255,.7);
+  transition:transform .25s;
+  flex-shrink:0;
+}
+.grade-btn.open .grade-arrow{transform:rotate(90deg);}
+
+/* ── Grade content (accordion body) ── */
+.grade-body{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 10px 10px;
+  margin-bottom:.5rem;
+  overflow:hidden;
+}
+.grade-body.open{display:block;}
+.grade-inner{padding:.85rem;}
+
+/* ── Coming soon ── */
+.coming-soon{
+  text-align:center;
+  padding:1rem;
+  font-size:12px;
+  color:var(--ink3);
+}
+
+/* ── Quiz cards ── */
+.cards{display:flex;flex-direction:column;gap:.55rem;}
+.card{
+  background:#F9F8F6;
+  border-radius:8px;
+  border:1px solid var(--line);
+  padding:.8rem .95rem;
+  text-decoration:none;
+  display:flex;align-items:center;gap:.85rem;
+  transition:box-shadow .18s,transform .18s,border-color .18s;
+}
+.card:hover{box-shadow:0 3px 14px rgba(0,0,0,.08);transform:translateY(-2px);border-color:#c8c4be;background:#fff;}
+.card-stripe{width:4px;border-radius:4px;align-self:stretch;flex-shrink:0;}
+.card-body{flex:1;min-width:0;}
+.card-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.3rem;line-height:1.4;}
+.card-meta{display:flex;flex-wrap:wrap;gap:.35rem;}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap;}
+.card-arrow{font-size:16px;color:var(--ink3);flex-shrink:0;transition:transform .18s,color .18s;}
+.card:hover .card-arrow{transform:translateX(4px);color:var(--ink2);}
+
+/* ── Grade colour schemes ── */
+.z1-btn{background:#5B7FA6;}
+.z1 .card-stripe{background:#2980B9;}
+.z1 .tag{background:#EBF5FB;color:#1A5276;}
+
+.z2-btn{background:#5A8C6E;}
+.z2 .card-stripe{background:#27AE60;}
+.z2 .tag{background:#EAFAF1;color:#145A32;}
+
+.z3-btn{background:#4A7A5E;}
+.z3 .card-stripe{background:#1E6B3C;}
+.z3 .tag{background:#D5F5E3;color:#0B5345;}
+
+.g1-btn{background:#8C6A4A;}
+.g1 .card-stripe{background:#D35400;}
+.g1 .tag{background:#FFF8F0;color:#784212;}
+
+.g2-btn{background:#8C4A4A;}
+.g2 .card-stripe{background:#C0392B;}
+.g2 .tag{background:#FDEDEC;color:#922B21;}
+
+.g3-btn{background:#6B5B8C;}
+.g3 .card-stripe{background:#6C3483;}
+.g3 .tag{background:#F3E5F5;color:#4A235A;}
+
+
+/* ── Sub-accordion (교과서 / 학력평가 / 부교재) ── */
+.sub-btn{
+  width:100%;
+  display:flex;align-items:center;gap:.7rem;
+  padding:.65rem .9rem;
+  border:1px solid var(--line);
+  background:#F7F5F0;
+  border-radius:8px;
+  margin-bottom:.4rem;
+  cursor:pointer;
+  text-align:left;
+  transition:background .18s, border-color .18s;
+}
+.sub-btn:hover{background:#F0EDE8;border-color:#c8c4be;}
+.sub-btn.open{border-radius:8px 8px 0 0;margin-bottom:0;background:#F0EDE8;border-color:#c8c4be;}
+.sub-label{flex:1;font-size:12px;font-weight:700;color:var(--ink2);letter-spacing:.2px;}
+.sub-count{font-size:10px;color:var(--ink3);font-weight:500;}
+.sub-arrow{font-size:11px;color:var(--ink3);transition:transform .22s;}
+.sub-btn.open .sub-arrow{transform:rotate(90deg);}
+.sub-body{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 8px 8px;
+  margin-bottom:.4rem;
+  overflow:hidden;
+}
+.sub-body.open{display:block;}
+.sub-inner{padding:.7rem .75rem;}
+.sub-empty{font-size:11px;color:var(--ink3);padding:.4rem .25rem;}
+
+
+/* ── Year sub-sub-accordion ── */
+.year-btn{
+  width:100%;
+  display:flex;align-items:center;gap:.6rem;
+  padding:.5rem .8rem;
+  border:1px solid var(--line);
+  background:#F2F0EC;
+  border-radius:6px;
+  margin-bottom:.35rem;
+  cursor:pointer;
+  text-align:left;
+  transition:background .18s,border-color .18s;
+}
+.year-btn:hover{background:#EAE7E2;border-color:#c8c4be;}
+.year-btn.open{border-radius:6px 6px 0 0;margin-bottom:0;background:#EAE7E2;}
+.year-label{flex:1;font-size:11px;font-weight:700;color:var(--ink2);}
+.year-arrow{font-size:10px;color:var(--ink3);transition:transform .22s;}
+.year-btn.open .year-arrow{transform:rotate(90deg);}
+.year-body{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 6px 6px;
+  margin-bottom:.35rem;
+  overflow:hidden;
+}
+.year-body.open{display:block;}
+.year-inner{padding:.6rem .65rem;}
+
+/* ── Footer ── */
+.footer{text-align:center;padding:1.5rem 1rem 2rem;font-size:11px;color:var(--ink3);border-top:1px solid var(--line);margin-top:1rem;}
+
+@media(max-width:480px){
+  .header-title{font-size:1.5rem;}
+  .grade-btn{padding:.8rem 1rem;}
+  .grade-label-main{font-size:13px;}
+  .card{padding:.7rem .85rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">영어과</div>
+  <div class="header-title">Vocabulary Quiz Hub</div>
+  <div class="header-sub">단어 퀴즈 모음 — 학년을 선택하세요</div>
+</div>
+
+<div class="main">
+
+  <!-- ══ 중학교 ══ -->
+  <div class="school-block">
+    <div class="school-header">
+      <span class="school-icon">🏫</span>
+      <span class="school-title">중학교 Middle School</span>
+    </div>
+
+    <!-- 중1 -->
+    <button class="grade-btn z1-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📘</div>
+      <div class="grade-label">
+        <div class="grade-label-main">중학교 1학년</div>
+        <div class="grade-label-sub">Middle School Year 1</div>
+      </div>
+      <div class="grade-count">0 quizzes</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner">
+        <div class="coming-soon">🔧 준비 중입니다.</div>
+      </div>
+    </div>
+
+    <!-- 중2 -->
+    <button class="grade-btn z2-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📗</div>
+      <div class="grade-label">
+        <div class="grade-label-main">중학교 2학년</div>
+        <div class="grade-label-sub">Middle School Year 2</div>
+      </div>
+      <div class="grade-count">0 quizzes</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner">
+        <div class="coming-soon">🔧 준비 중입니다.</div>
+      </div>
+    </div>
+
+    <!-- 중3 -->
+    <button class="grade-btn z3-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📙</div>
+      <div class="grade-label">
+        <div class="grade-label-main">중학교 3학년</div>
+        <div class="grade-label-sub">Middle School Year 3</div>
+      </div>
+      <div class="grade-count">1 quiz</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner z3">
+        <div class="cards">
+          <a class="card" href="https://doors1965.github.io/middleschool_English_3rd_grade/" target="_blank">
+            <div class="card-stripe"></div>
+            <div class="card-body">
+              <div class="card-title">동아(윤정미) 개정 중3 영어</div>
+              <div class="card-meta">
+                <span class="tag">Lessons 1–2</span>
+                <span class="tag">95 words</span>
+                <span class="tag">Follow Your Dream · Food for the Heart</span>
+              </div>
+            </div>
+            <div class="card-arrow">→</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ 고등학교 ══ -->
+  <div class="school-block">
+    <div class="school-header">
+      <span class="school-icon">🎓</span>
+      <span class="school-title">고등학교 High School</span>
+    </div>
+
+    <!-- 고1 -->
+    <button class="grade-btn g1-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📕</div>
+      <div class="grade-label">
+        <div class="grade-label-main">고등학교 1학년</div>
+        <div class="grade-label-sub">High School Year 1</div>
+      </div>
+      <div class="grade-count">1 quiz</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner g1">
+
+        <!-- 교과서 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📖 교과서</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+        <!-- 학력평가 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📝 학력평가</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <button class="year-btn" onclick="toggleYear(this)">
+              <span class="year-label">📅 2026학년도</span>
+              <span class="year-arrow">▶</span>
+            </button>
+            <div class="year-body">
+              <div class="year-inner">
+                <div class="cards">
+                  <a class="card" href="https://doors1965.github.io/vocab-quiz--1-2026-3/" target="_blank">
+                    <div class="card-stripe"></div>
+                    <div class="card-body">
+                      <div class="card-title">2026학년도 3월 고1 전국연합학력평가</div>
+                      <div class="card-meta">
+                        <span class="tag">Q18–Q45</span>
+                        <span class="tag">175 words</span>
+                        <span class="tag">2026년 3월 모의고사</span>
+                      </div>
+                    </div>
+                    <div class="card-arrow">→</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 부교재 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📚 부교재</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 고2 -->
+    <button class="grade-btn g2-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📔</div>
+      <div class="grade-label">
+        <div class="grade-label-main">고등학교 2학년</div>
+        <div class="grade-label-sub">High School Year 2</div>
+      </div>
+      <div class="grade-count">2 quizzes</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner g2">
+
+        <!-- 교과서 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📖 교과서</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+        <!-- 학력평가 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📝 학력평가</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <button class="year-btn" onclick="toggleYear(this)">
+              <span class="year-label">📅 2026학년도</span>
+              <span class="year-arrow">▶</span>
+            </button>
+            <div class="year-body">
+              <div class="year-inner">
+                <div class="cards">
+                  <a class="card" href="https://doors1965.github.io/-vocab-quiz/" target="_blank">
+                    <div class="card-stripe"></div>
+                    <div class="card-body">
+                      <div class="card-title">2026학년도 3월 고2 전국연합학력평가</div>
+                      <div class="card-meta">
+                        <span class="tag">Q18–Q45</span>
+                        <span class="tag">175 words</span>
+                        <span class="tag">2026년 3월 모의고사</span>
+                      </div>
+                    </div>
+                    <div class="card-arrow">→</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 부교재 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📚 부교재</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <div class="cards">
+              <a class="card" href="https://doors1965.github.io/vocab-quiz-수능특강/" target="_blank">
+                <div class="card-stripe"></div>
+                <div class="card-body">
+                  <div class="card-title">EBS 수능특강 Q 미니모의고사 영어 Start</div>
+                  <div class="card-meta">
+                    <span class="tag">01~07회</span>
+                    <span class="tag">462 words</span>
+                    <span class="tag">B1–C1 · Phrasal verbs & Idioms</span>
+                  </div>
+                </div>
+                <div class="card-arrow">→</div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 고3 -->
+    <button class="grade-btn g3-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📓</div>
+      <div class="grade-label">
+        <div class="grade-label-main">고등학교 3학년</div>
+        <div class="grade-label-sub">High School Year 3</div>
+      </div>
+      <div class="grade-count">0 quizzes</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner g3">
+
+        <!-- 교과서 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📖 교과서</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+        <!-- 학력평가 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📝 학력평가</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+        <!-- 수학능력시험 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">🎯 수학능력시험</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+        <!-- 부교재 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📚 부교재</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  영어과 · 제작: doors1965 · Powered by Claude
+</div>
+
+<script>
+function toggle(btn){
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+function toggleSub(btn){
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+function toggleYear(btn){
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+</script>
+
+</body>
+</html>
