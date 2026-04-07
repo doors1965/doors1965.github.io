@@ -222,6 +222,36 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 .year-body.open{display:block;}
 .year-inner{padding:.6rem .65rem;}
 
+/* ── Subject sub-sub-sub-accordion (영어Ⅰ, 영어Ⅱ etc.) ── */
+.subject-btn{
+  width:100%;
+  display:flex;align-items:center;gap:.6rem;
+  padding:.5rem .8rem;
+  border:1px solid var(--line);
+  background:#EBF0F5;
+  border-radius:6px;
+  margin-bottom:.35rem;
+  cursor:pointer;
+  text-align:left;
+  transition:background .18s,border-color .18s;
+}
+.subject-btn:hover{background:#DDE6EF;border-color:#c8c4be;}
+.subject-btn.open{border-radius:6px 6px 0 0;margin-bottom:0;background:#DDE6EF;}
+.subject-label{flex:1;font-size:11px;font-weight:700;color:#1A3A5C;}
+.subject-arrow{font-size:10px;color:var(--ink3);transition:transform .22s;}
+.subject-btn.open .subject-arrow{transform:rotate(90deg);}
+.subject-body{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 6px 6px;
+  margin-bottom:.35rem;
+  overflow:hidden;
+}
+.subject-body.open{display:block;}
+.subject-inner{padding:.6rem .65rem;}
+
 /* ── Footer ── */
 .footer{text-align:center;padding:1.5rem 1rem 2rem;font-size:11px;color:var(--ink3);border-top:1px solid var(--line);margin-top:1rem;}
 
@@ -436,11 +466,42 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <!-- 교과서 -->
         <button class="sub-btn" onclick="toggleSub(this)">
           <span class="sub-label">📖 교과서</span>
-          <span class="sub-count">0 quizzes</span>
+          <span class="sub-count">1 quiz</span>
           <span class="sub-arrow">▶</span>
         </button>
         <div class="sub-body">
-          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+          <div class="sub-inner">
+            <button class="subject-btn" onclick="toggleSubject(this)">
+              <span class="subject-label">영어Ⅰ</span>
+              <span class="subject-arrow">▶</span>
+            </button>
+            <div class="subject-body">
+              <div class="subject-inner">
+                <button class="year-btn" onclick="toggleYear(this)">
+                  <span class="year-label">능률(오선영)</span>
+                  <span class="year-arrow">▶</span>
+                </button>
+                <div class="year-body">
+                  <div class="year-inner">
+                    <div class="cards">
+                      <a class="card" href="https://doors1965.github.io/vocab-quiz-g2-neungyul-osun/" target="_blank">
+                        <div class="card-stripe"></div>
+                        <div class="card-body">
+                          <div class="card-title">능률(오선영) 고2 영어Ⅰ — Lessons 1–5</div>
+                          <div class="card-meta">
+                            <span class="tag">L1–L5</span>
+                            <span class="tag">202 words</span>
+                            <span class="tag">B1–C1</span>
+                          </div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 학력평가 -->
@@ -496,7 +557,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <div class="grade-label-main">고등학교 2학년</div>
         <div class="grade-label-sub">High School Year 2</div>
       </div>
-      <div class="grade-count">3 quizzes</div>
+      <div class="grade-count">4 quizzes</div>
       <div class="grade-arrow">▶</div>
     </button>
     <div class="grade-body">
@@ -505,11 +566,42 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         <!-- 교과서 -->
         <button class="sub-btn" onclick="toggleSub(this)">
           <span class="sub-label">📖 교과서</span>
-          <span class="sub-count">0 quizzes</span>
+          <span class="sub-count">1 quiz</span>
           <span class="sub-arrow">▶</span>
         </button>
         <div class="sub-body">
-          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+          <div class="sub-inner">
+            <button class="subject-btn" onclick="toggleSubject(this)">
+              <span class="subject-label">영어Ⅰ</span>
+              <span class="subject-arrow">▶</span>
+            </button>
+            <div class="subject-body">
+              <div class="subject-inner">
+                <button class="year-btn" onclick="toggleYear(this)">
+                  <span class="year-label">능률(오선영)</span>
+                  <span class="year-arrow">▶</span>
+                </button>
+                <div class="year-body">
+                  <div class="year-inner">
+                    <div class="cards">
+                      <a class="card" href="https://doors1965.github.io/vocab-quiz-g2-neungyul-osun/" target="_blank">
+                        <div class="card-stripe"></div>
+                        <div class="card-body">
+                          <div class="card-title">능률(오선영) 고2 영어Ⅰ — Lessons 1–5</div>
+                          <div class="card-meta">
+                            <span class="tag">L1–L5</span>
+                            <span class="tag">202 words</span>
+                            <span class="tag">B1–C1</span>
+                          </div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 학력평가 -->
@@ -663,6 +755,12 @@ function toggleSub(btn){
   body.classList.toggle('open', !isOpen);
 }
 function toggleYear(btn){
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+function toggleSubject(btn){
   var body = btn.nextElementSibling;
   var isOpen = btn.classList.contains('open');
   btn.classList.toggle('open', !isOpen);
