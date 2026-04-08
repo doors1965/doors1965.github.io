@@ -2,1123 +2,740 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>능률(오선영) 고2 영어Ⅰ — Vocabulary Quiz</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영어 단어 Quiz Hub — doors1965</title>
 <style>
-:root{
-  --acc:#1A3A5C;--acc2:#2C5282;--grn:#1E6B3C;--grn-l:#E3F5EB;
-  --red:#8B0000;--red-l:#FDEDEC;--bg:#F5F2EB;--sf:#FEFCF7;--sf2:#EEEBE3;
-  --ink:#1A1814;--ink2:#6B6760;--ink3:#A8A49E;
-  --bd:rgba(26,24,20,.13);--bds:rgba(26,24,20,.26);--r:10px;--rl:16px;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;}
-.nav{background:var(--acc);color:#fff;padding:0 .75rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 6px rgba(0,0,0,.25);}
-.nav-title{font-size:13px;font-weight:700;margin-right:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px;}
-.nav-tab{padding:13px 14px;font-size:13px;font-weight:600;cursor:pointer;border:none;border-bottom:3px solid transparent;color:rgba(255,255,255,.6);background:none;font-family:inherit;white-space:nowrap;transition:all .15s;}
-.nav-tab.active{color:#fff;border-bottom-color:#fff;}
-.nav-tab:hover{color:#fff;}
-.panel{display:none;padding:1rem 1rem 3rem;max-width:760px;margin:0 auto;}
-.panel.active{display:block;}
-.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:1.2rem;margin-bottom:1rem;}
-.ct{font-size:11px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.85rem;}
-.qgrid{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:.6rem;}
-.qbtn{padding:5px 11px;border:1.5px solid var(--bds);border-radius:20px;background:var(--sf);color:var(--ink2);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;user-select:none;font-family:inherit;}
-.qbtn:hover{background:var(--sf2);}
-.qbtn.on{background:var(--acc);color:#fff;border-color:var(--acc);}
-.lbtn{background:none;border:none;color:var(--acc);font-size:12px;cursor:pointer;text-decoration:underline;padding:0;font-family:inherit;}
-.ctr{font-size:12px;color:var(--ink2);margin-top:.4rem;}
-.ctr strong{color:var(--acc);}
-.opt-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:.55rem;}
-.ck{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);cursor:pointer;}
-.ck input{width:15px;height:15px;accent-color:var(--acc);}
-.ck small{color:var(--ink3);font-size:11px;}
-input[type=text]{padding:7px 11px;border:1px solid var(--bds);border-radius:var(--r);font-size:13px;background:var(--sf);color:var(--ink);font-family:inherit;outline:none;}
-input[type=text]:focus{border-color:var(--acc);}
-.btn{padding:10px 18px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .15s;}
-.btn-p{background:var(--acc);color:#fff;}
-.btn-p:hover{background:#0f2640;}
-.btn-s{background:var(--sf2);color:var(--ink);border:1px solid var(--bds);}
-.btn-s:hover{background:#ddd9d0;}
-.btn-g{background:var(--grn);color:#fff;}
-.btn-g:hover{background:#155230;}
-.brow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.75rem;}
-.st{font-size:12px;padding:8px 12px;border-radius:var(--r);margin-top:.65rem;display:none;}
-.ok{background:var(--grn-l);color:var(--grn);border:1px solid #a8dbb8;}
-.er{background:var(--red-l);color:var(--red);border:1px solid #f5c0c0;}
-.mc{border:2px solid var(--bds);border-radius:var(--rl);padding:1rem;cursor:pointer;transition:all .15s;margin-bottom:.65rem;}
-.mc:hover{border-color:var(--acc);}
-.mc.sel{border-color:var(--acc);background:#E3EEF7;}
-.mc-t{font-size:13px;font-weight:700;color:var(--ink);}
-.mc-d{font-size:12px;color:var(--ink2);margin-top:2px;}
-.lscore{display:flex;gap:12px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:.6rem 1rem;margin-bottom:1rem;flex-wrap:wrap;}
-.ls{font-size:11px;color:var(--ink2);}
-.ls span{font-size:15px;font-weight:700;color:var(--ink);display:block;}
-.prog-t{height:4px;background:var(--sf2);border-radius:2px;margin-bottom:1.2rem;}
-.prog-f{height:4px;background:var(--acc);border-radius:2px;transition:width .3s;}
-.qcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:1.2rem;margin-bottom:.85rem;}
-.qmeta{display:flex;gap:5px;margin-bottom:.55rem;flex-wrap:wrap;align-items:center;}
-.qnum{font-size:11px;color:var(--ink3);}
-.badge{font-size:10px;padding:2px 6px;border-radius:8px;font-weight:700;background:#E3EEF7;color:var(--acc);}
-.tbadge{font-size:10px;padding:2px 6px;border-radius:8px;font-weight:700;background:#E3EEF7;color:var(--acc);}
-.qprompt{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.4rem;line-height:1.5;}
-.qhint{font-size:12px;color:var(--ink2);margin-bottom:.85rem;line-height:1.5;font-style:italic;}
-.opts{display:grid;gap:7px;}
-.obtn{text-align:left;background:var(--sf2);border:1.5px solid var(--bds);border-radius:var(--r);padding:9px 13px;font-size:13px;color:var(--ink);cursor:pointer;transition:all .15s;font-family:inherit;line-height:1.4;}
-.obtn:hover:not(:disabled){background:#ddd9d0;border-color:var(--acc);}
-.obtn.correct{background:var(--grn-l);border-color:var(--grn);color:var(--grn);font-weight:600;}
-.obtn.wrong{background:var(--red-l);border-color:var(--red);color:var(--red);}
-.obtn.reveal{background:var(--grn-l);border-color:var(--grn);color:var(--grn);}
-.frow{display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
-.finp{flex:1;min-width:160px;padding:9px 12px;border:1.5px solid var(--bds);border-radius:var(--r);font-size:14px;font-family:inherit;background:var(--sf);color:var(--ink);outline:none;}
-.finp:focus{border-color:var(--acc);}
-.finp.correct{border-color:var(--grn);background:var(--grn-l);color:var(--grn);}
-.finp.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
-.expl{font-size:12px;color:var(--ink2);margin-top:.65rem;padding:7px 11px;background:var(--sf2);border-radius:var(--r);border-left:3px solid var(--acc);display:none;line-height:1.6;}
-.eng-def{font-size:11px;color:var(--acc);background:#E3EEF7;border-radius:6px;padding:3px 9px;display:inline-block;margin-bottom:.5rem;font-style:italic;}
-.score-emoji{font-size:2.8rem;text-align:center;margin:.75rem 0 .25rem;}
-.score-big{font-size:3rem;font-weight:700;color:var(--acc);text-align:center;}
-.score-sub{font-size:13px;color:var(--ink2);text-align:center;margin-bottom:1.25rem;}
-.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:1.25rem;}
-.sbox{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:.8rem;text-align:center;}
-.sbox .v{font-size:1.5rem;font-weight:700;color:var(--ink);}
-.sbox .l{font-size:11px;color:var(--ink2);margin-top:2px;}
-.ritem{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:.85rem;margin-bottom:.5rem;border-left:3px solid var(--red);}
-.rword{font-size:13px;font-weight:700;}
-.rans{font-size:12px;margin-top:3px;line-height:1.55;}
-.cat-card{border:2px solid var(--bds);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:border-color .2s;}
-.cat-card:hover{border-color:var(--acc);}
-.cat-card.cat-active{border-color:var(--acc);}
-.cat-header{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1rem;background:var(--sf2);gap:10px;}
-.cat-title{font-size:14px;font-weight:700;color:var(--ink);}
-.cat-desc{font-size:12px;color:var(--ink2);margin-top:2px;}
-.cat-arrow{font-size:13px;color:var(--acc);font-weight:700;flex-shrink:0;transition:transform .2s;}
-.cat-body{padding:.75rem .75rem .25rem;}
-.scr-zone{min-height:52px;border:2px dashed var(--bds);border-radius:var(--r);padding:8px;display:flex;flex-wrap:wrap;gap:6px;background:var(--sf);transition:border-color .2s;align-content:flex-start;}
-.scr-zone.correct-zone{border-color:var(--grn);background:var(--grn-l);}
-.scr-zone.wrong-zone{border-color:var(--red);background:var(--red-l);}
-.word-chip{padding:7px 13px;background:#fff;border:1.5px solid var(--bds);border-radius:20px;font-size:13px;color:var(--ink);cursor:pointer;user-select:none;transition:all .15s;font-family:inherit;line-height:1;}
-.word-chip:hover:not(:disabled){border-color:var(--acc);background:#E3EEF7;transform:translateY(-1px);}
-.word-chip.correct-chip{background:var(--grn-l);border-color:var(--grn);color:var(--grn);cursor:default;}
-.word-chip.wrong-chip{background:var(--red-l);border-color:var(--red);color:var(--red);}
-.scr-feedback{font-size:13px;margin-top:8px;font-weight:600;min-height:20px;}
-.scr-feedback.ok{color:var(--grn);}
-.scr-feedback.ng{color:var(--red);}
-.scr-key{font-size:12px;color:var(--ink2);font-style:italic;margin-top:5px;padding:6px 10px;background:var(--grn-l);border-radius:var(--r);border-left:3px solid var(--grn);}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Serif+Display&display=swap');
 
-/* ── Round folder ── */
-.lesson-folder{margin-bottom:.5rem;}
-.lesson-btn{width:100%;display:flex;align-items:center;gap:.6rem;padding:.55rem .85rem;background:var(--acc);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;text-align:left;transition:background .15s;}
-.lesson-btn:hover{background:#0f2640;}
-.lesson-btn.open{border-radius:8px 8px 0 0;}
-.lesson-arrow{font-size:11px;transition:transform .2s;margin-left:auto;}
-.lesson-btn.open .lesson-arrow{transform:rotate(90deg);}
-.lesson-body{display:none;background:#EAF0F7;border:1px solid var(--bds);border-top:none;border-radius:0 0 8px 8px;padding:.6rem .75rem;}
-.lesson-body.open{display:block;}
-.lesson-count{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:rgba(255,255,255,.2);color:#fff;}
-.stars{font-size:11px;margin-left:5px;vertical-align:middle;letter-spacing:1px;}
-.scr-word-label{font-size:13px;font-weight:700;color:var(--acc);margin-bottom:4px;}
-.scr-word-ko{font-size:12px;margin-bottom:.75rem;line-height:1.6;}
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#F7F5F0;--ink:#1A1A2E;--ink2:#4A4A6A;--ink3:#8888AA;
+  --acc:#1A3A5C;--line:#E0DDD8;--card:#FFFFFF;
+}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;}
+
+
+/* ── Top bar ── */
+.topbar{
+  background:#0F2744;
+  padding:.5rem 1.25rem;
+  display:flex;
+  align-items:center;
+}
+.topbar-brand{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  color:rgba(255,255,255,.7);
+  text-transform:uppercase;
+}
+
+/* ── Header ── */
+.header{background:var(--acc);padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.05);}
+.header::after{content:'';position:absolute;bottom:-40px;left:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04);}
+.header-label{font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-bottom:.5rem;}
+.header-title{font-family:'DM Serif Display',serif;font-size:2rem;color:#fff;margin-bottom:.4rem;line-height:1.2;}
+.header-sub{font-size:13px;color:rgba(255,255,255,.6);}
+
+/* ── Main ── */
+.main{max-width:720px;margin:0 auto;padding:2rem 1rem 3rem;}
+
+/* ── School block ── */
+.school-block{margin-bottom:2rem;}
+.school-header{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.75rem 1rem;
+  background:var(--acc);
+  border-radius:10px;
+  margin-bottom:1rem;
+}
+.school-icon{font-size:18px;}
+.school-title{font-size:15px;font-weight:700;color:#fff;letter-spacing:.3px;}
+
+/* ── Grade accordion button ── */
+.grade-btn{
+  width:100%;
+  display:flex;align-items:center;gap:.85rem;
+  padding:.9rem 1.1rem;
+  border:none;cursor:pointer;
+  border-radius:10px;
+  margin-bottom:.5rem;
+  transition:all .2s;
+  text-align:left;
+  position:relative;
+}
+.grade-btn:hover{filter:brightness(.95);}
+.grade-btn.open{border-radius:10px 10px 0 0;margin-bottom:0;}
+
+.grade-icon-wrap{
+  width:40px;height:40px;
+  border-radius:10px;
+  background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.grade-label{flex:1;}
+.grade-label-main{font-size:14px;font-weight:700;color:#fff;}
+.grade-label-sub{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px;}
+.grade-count{
+  font-size:11px;font-weight:600;
+  padding:3px 9px;border-radius:20px;
+  background:rgba(255,255,255,.2);
+  color:#fff;
+  flex-shrink:0;
+}
+.grade-arrow{
+  font-size:13px;color:rgba(255,255,255,.7);
+  transition:transform .25s;
+  flex-shrink:0;
+}
+.grade-btn.open .grade-arrow{transform:rotate(90deg);}
+
+/* ── Grade content (accordion body) ── */
+.grade-body{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 10px 10px;
+  margin-bottom:.5rem;
+  overflow:hidden;
+}
+.grade-body.open{display:block;}
+.grade-inner{padding:.85rem;}
+
+/* ── Coming soon ── */
+.coming-soon{
+  text-align:center;
+  padding:1rem;
+  font-size:12px;
+  color:var(--ink3);
+}
+
+/* ── Quiz cards ── */
+.cards{display:flex;flex-direction:column;gap:.55rem;}
+.card{
+  background:#F9F8F6;
+  border-radius:8px;
+  border:1px solid var(--line);
+  padding:.8rem .95rem;
+  text-decoration:none;
+  display:flex;align-items:center;gap:.85rem;
+  transition:box-shadow .18s,transform .18s,border-color .18s;
+}
+.card:hover{box-shadow:0 3px 14px rgba(0,0,0,.08);transform:translateY(-2px);border-color:#c8c4be;background:#fff;}
+.card-stripe{width:4px;border-radius:4px;align-self:stretch;flex-shrink:0;}
+.card-body{flex:1;min-width:0;}
+.card-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.3rem;line-height:1.4;}
+.card-meta{display:flex;flex-wrap:wrap;gap:.35rem;}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap;}
+.card-arrow{font-size:16px;color:var(--ink3);flex-shrink:0;transition:transform .18s,color .18s;}
+.card:hover .card-arrow{transform:translateX(4px);color:var(--ink2);}
+
+/* ── Grade colour schemes ── */
+.z1-btn{background:#5B7FA6;}
+.z1 .card-stripe{background:#2980B9;}
+.z1 .tag{background:#EBF5FB;color:#1A5276;}
+
+.z2-btn{background:#5A8C6E;}
+.z2 .card-stripe{background:#27AE60;}
+.z2 .tag{background:#EAFAF1;color:#145A32;}
+
+.z3-btn{background:#3B8A9E;}
+.z3 .card-stripe{background:#2980B9;}
+.z3 .tag{background:#E8F6FA;color:#1A5276;}
+
+.g1-btn{background:#8C6A4A;}
+.g1 .card-stripe{background:#D35400;}
+.g1 .tag{background:#FFF8F0;color:#784212;}
+
+.g2-btn{background:#8C4A4A;}
+.g2 .card-stripe{background:#C0392B;}
+.g2 .tag{background:#FDEDEC;color:#922B21;}
+
+.g3-btn{background:#6B5B8C;}
+.g3 .card-stripe{background:#6C3483;}
+.g3 .tag{background:#F3E5F5;color:#4A235A;}
+
+
+/* ── Sub-accordion (교과서 / 학력평가 / 부교재) ── */
+.sub-btn{
+  width:100%;
+  display:flex;align-items:center;gap:.7rem;
+  padding:.65rem .9rem;
+  border:1px solid var(--line);
+  background:#F7F5F0;
+  border-radius:8px;
+  margin-bottom:.4rem;
+  cursor:pointer;
+  text-align:left;
+  transition:background .18s, border-color .18s;
+}
+.sub-btn:hover{background:#F0EDE8;border-color:#c8c4be;}
+.sub-btn.open{border-radius:8px 8px 0 0;margin-bottom:0;background:#F0EDE8;border-color:#c8c4be;}
+.sub-label{flex:1;font-size:12px;font-weight:700;color:var(--ink2);letter-spacing:.2px;}
+.sub-count{font-size:10px;color:var(--ink3);font-weight:500;}
+.sub-arrow{font-size:11px;color:var(--ink3);transition:transform .22s;}
+.sub-btn.open .sub-arrow{transform:rotate(90deg);}
+.sub-body{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 8px 8px;
+  margin-bottom:.4rem;
+  overflow:hidden;
+}
+.sub-body.open{display:block;}
+.sub-inner{padding:.7rem .75rem;}
+.sub-empty{font-size:11px;color:var(--ink3);padding:.4rem .25rem;}
+
+
+/* ── Year sub-sub-accordion ── */
+.year-btn{
+  width:100%;
+  display:flex;align-items:center;gap:.6rem;
+  padding:.5rem .8rem;
+  border:1px solid var(--line);
+  background:#F2F0EC;
+  border-radius:6px;
+  margin-bottom:.35rem;
+  cursor:pointer;
+  text-align:left;
+  transition:background .18s,border-color .18s;
+}
+.year-btn:hover{background:#EAE7E2;border-color:#c8c4be;}
+.year-btn.open{border-radius:6px 6px 0 0;margin-bottom:0;background:#EAE7E2;}
+.year-label{flex:1;font-size:11px;font-weight:700;color:var(--ink2);}
+.year-arrow{font-size:10px;color:var(--ink3);transition:transform .22s;}
+.year-btn.open .year-arrow{transform:rotate(90deg);}
+.year-body{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 6px 6px;
+  margin-bottom:.35rem;
+  overflow:hidden;
+}
+.year-body.open{display:block;}
+.year-inner{padding:.6rem .65rem;}
+
+/* ── Subject sub-sub-sub-accordion (영어Ⅰ, 영어Ⅱ etc.) ── */
+.subject-btn{
+  width:100%;
+  display:flex;align-items:center;gap:.6rem;
+  padding:.5rem .8rem;
+  border:1px solid var(--line);
+  background:#EBF0F5;
+  border-radius:6px;
+  margin-bottom:.35rem;
+  cursor:pointer;
+  text-align:left;
+  transition:background .18s,border-color .18s;
+}
+.subject-btn:hover{background:#DDE6EF;border-color:#c8c4be;}
+.subject-btn.open{border-radius:6px 6px 0 0;margin-bottom:0;background:#DDE6EF;}
+.subject-label{flex:1;font-size:11px;font-weight:700;color:#1A3A5C;}
+.subject-arrow{font-size:10px;color:var(--ink3);transition:transform .22s;}
+.subject-btn.open .subject-arrow{transform:rotate(90deg);}
+.subject-body{
+  display:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 6px 6px;
+  margin-bottom:.35rem;
+  overflow:hidden;
+}
+.subject-body.open{display:block;}
+.subject-inner{padding:.6rem .65rem;}
+
+/* ── Footer ── */
+.footer{text-align:center;padding:1.5rem 1rem 2rem;font-size:11px;color:var(--ink3);border-top:1px solid var(--line);margin-top:1rem;}
+
 @media(max-width:480px){
-  .nav-title{font-size:12px;}
-  .nav-tab{padding:12px 10px;font-size:11px;}
-  .qprompt{font-size:14px;}
-  .obtn{font-size:13px;}
+  .header-title{font-size:1.5rem;}
+  .grade-btn{padding:.8rem 1rem;}
+  .grade-label-main{font-size:13px;}
+  .card{padding:.7rem .85rem;}
 }
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="nav-title">📚 능률(오선영) 고2 영어Ⅰ — Vocabulary Quiz</div>
-  <button class="nav-tab active" id="tab-btn-teacher">🖥 Teacher</button>
-  <button class="nav-tab" id="tab-btn-student">📱 Student</button>
-</nav>
 
-<!-- TEACHER PANEL -->
-<div class="panel active" id="panel-teacher">
-  <div class="card">
-    <div class="ct">Step 1 — Select rounds</div>
-
-    <div class="qgrid" id="tq-grid"></div>
-    <div style="display:flex;gap:10px;margin-bottom:.5rem;">
-      <button class="lbtn" id="tq-all">Select all</button>
-      <button class="lbtn" id="tq-clr">Clear all</button>
-    </div>
-    <div class="ctr" id="tq-ctr">0 words selected</div>
-  </div>
-  <div class="card">
-    <div class="ct">Step 2 — Quiz columns</div>
-    <div class="opt-row">
-      <label class="ck"><input type="checkbox" id="t-ko" checked><span>① Korean meaning</span></label>
-      <label class="ck"><input type="checkbox" id="t-en"><span>② English word</span></label>
-      <label class="ck"><input type="checkbox" id="t-fi" checked><span>③ Fill in the blank</span></label>
-      <label class="ck"><input type="checkbox" id="t-po"><span>④ Part of speech</span></label>
-      <label class="ck"><input type="checkbox" id="t-ky" checked><span>Include answer key sheet</span></label>
-    </div>
-    <div style="margin-top:.5rem;">
-      <label style="font-size:13px;color:var(--ink2);">Class / 반:
-        <input type="text" id="t-cls" placeholder="e.g. 2-3반" style="width:130px;margin-left:6px;">
-      </label>
-    </div>
-    <div class="opt-row" style="margin-top:.65rem;">
-      <label class="ck"><input type="checkbox" id="t-sh" checked><span>Shuffle order</span></label>
-    </div>
-  </div>
-  <div class="card">
-    <div class="ct">Step 3 — Generate</div>
-    <div class="brow">
-      <button class="btn btn-s" id="t-prev-btn">👁 Preview</button>
-      <button class="btn btn-p" id="t-gen-btn">⬇ Download Excel Quiz</button>
-    </div>
-    <div class="st" id="t-status"></div>
-      <div id="t-preview" style="overflow-x:auto;margin-top:.5rem;font-size:12px;"></div>
-  </div>
+<div class="topbar">
+  <span class="topbar-brand">Education for All</span>
+</div>
+<div class="header">
+  <div class="header-label">영어과</div>
+  <div class="header-title">Vocabulary Quiz Hub</div>
+  <div class="header-sub">단어 퀴즈 모음 — 학년을 선택하세요</div>
 </div>
 
-<!-- STUDENT PANEL -->
-<div class="panel" id="panel-student">
-  <div id="s-setup">
-    <div class="card">
-      <div class="ct">Select questions</div>
-      <div class="qgrid" id="sq-grid"></div>
-      <div style="display:flex;gap:10px;margin-bottom:.5rem;">
-        <button class="lbtn" id="sq-all">Select all</button>
-        <button class="lbtn" id="sq-clr">Clear all</button>
-      </div>
-      <div class="ctr" id="sq-ctr">0 words selected</div>
+<div class="main">
+
+  <!-- ══ 중학교 ══ -->
+  <div class="school-block">
+    <div class="school-header">
+      <span class="school-icon">🏫</span>
+      <span class="school-title">중학교 Middle School</span>
     </div>
-    <div class="card">
-      <div class="ct">Quiz type : <span style="font-size:11px;color:#000;font-weight:400;font-style:italic;text-transform:none;letter-spacing:0;">👆 Choose what to study!</span></div>
-      <div class="cat-card" id="cat-vocab" onclick="toggleCat('vocab')">
-        <div class="cat-header">
-          <div>
-            <div class="cat-title">① 📚 Let's Study Vocabulary!</div>
-            <div class="cat-desc">Word meaning, spelling &amp; definition quizzes</div>
+
+    <!-- 중1 -->
+    <button class="grade-btn z1-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📘</div>
+      <div class="grade-label">
+        <div class="grade-label-main">중학교 1학년</div>
+        <div class="grade-label-sub">Middle School Year 1</div>
+      </div>
+      <div class="grade-count">0 quizzes</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner">
+        <div class="coming-soon">🔧 준비 중입니다.</div>
+      </div>
+    </div>
+
+    <!-- 중2 -->
+    <button class="grade-btn z2-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📗</div>
+      <div class="grade-label">
+        <div class="grade-label-main">중학교 2학년</div>
+        <div class="grade-label-sub">Middle School Year 2</div>
+      </div>
+      <div class="grade-count">2 quizzes</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner z2">
+
+        <!-- 교과서 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📖 교과서</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <button class="year-btn" onclick="toggleYear(this)">
+              <span class="year-label">두산(윤정미)</span>
+              <span class="year-arrow">▶</span>
+            </button>
+            <div class="year-body">
+              <div class="year-inner">
+                <div class="cards">
+                  <a class="card" href="https://doors1965.github.io/vocab-quiz-middle2-doosanyoon/" target="_blank">
+                    <div class="card-stripe"></div>
+                    <div class="card-body">
+                      <div class="card-title">두산(윤) 중2 영어 — Lessons 1 &amp; 2</div>
+                      <div class="card-meta">
+                        <span class="tag">Lessons 1–2</span>
+                        <span class="tag">67 words</span>
+                        <span class="tag">A2–B1 · NGO · Communication</span>
+                      </div>
+                    </div>
+                    <div class="card-arrow">→</div>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="cat-arrow" id="arrow-vocab">▼</div>
         </div>
-        <div class="cat-body" id="body-vocab" style="display:none;">
-          <div class="mc sel" id="mode-mc"><div class="mc-t">Multiple choice 객관식 <span class="stars">⭐⭐</span></div><div class="mc-d">4 options — pick the correct Korean meaning</div></div>
-          <div class="mc" id="mode-w1"><div class="mc-t">✍️ Type 1 — Korean → English <span class="stars">⭐⭐⭐</span></div><div class="mc-d">See Korean meaning → type the English word</div></div>
-          <div class="mc" id="mode-w2"><div class="mc-t">✍️ Type 2 — Definition → English <span class="stars">⭐⭐⭐</span></div><div class="mc-d">See English definition → type the English word</div></div>
-        </div>
-      </div>
-      <div class="cat-card" id="cat-sent" onclick="toggleCat('sent')" style="margin-top:.6rem;">
-        <div class="cat-header">
-          <div>
-            <div class="cat-title">② 📝 Let's Study Sentences!</div>
-            <div class="cat-desc">Fill in blanks &amp; rebuild example sentences</div>
+
+        <!-- 추가지문 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📄 추가지문</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <button class="year-btn" onclick="toggleYear(this)">
+              <span class="year-label">두산(윤정미)</span>
+              <span class="year-arrow">▶</span>
+            </button>
+            <div class="year-body">
+              <div class="year-inner">
+                <div class="cards">
+                  <a class="card" href="https://doors1965.github.io/vocab-quiz-middle2-doosanyoon-extra/" target="_blank">
+                    <div class="card-stripe"></div>
+                    <div class="card-body">
+                      <div class="card-title">두산(윤) 중2 추가지문 — Lesson 1</div>
+                      <div class="card-meta">
+                        <span class="tag">Funny Idioms</span>
+                        <span class="tag">The Miser</span>
+                        <span class="tag">Cornwall</span>
+                        <span class="tag">48 words</span>
+                      </div>
+                    </div>
+                    <div class="card-arrow">→</div>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="cat-arrow" id="arrow-sent">▶</div>
         </div>
-        <div class="cat-body" id="body-sent" style="display:none;">
-          <div class="mc" id="mode-fi2"><div class="mc-t">✏️ Fill in the blank + 🇰🇷 <span class="stars">⭐⭐</span></div><div class="mc-d">Korean translation shown as scaffold</div></div>
-          <div class="mc" id="mode-fi"><div class="mc-t">✏️ Fill in the blank <span class="stars">⭐⭐⭐</span></div><div class="mc-d">Type the missing word — no Korean hint</div></div>
-          <div class="mc" id="mode-scr"><div class="mc-t">🔀 Sentence Scramble <span class="stars">⭐⭐⭐⭐⭐</span></div><div class="mc-d">Click words to rebuild the sentence in order</div></div>
-          <div class="mc" id="mode-scr2"><div class="mc-t">🌈 Medium Scramble <span class="stars">⭐⭐⭐</span></div><div class="mc-d">Words colour-coded by part of speech as a hint</div></div>
-          <div class="mc" id="mode-scr3"><div class="mc-t">🧩 Easy Scramble — Chunks <span class="stars">⭐⭐</span></div><div class="mc-d">Arrange meaningful phrase chunks in the right order</div></div>
-        </div>
+
       </div>
     </div>
-    <div class="card">
-      <div class="ct">Options</div>
-      <div class="opt-row">
-        <label class="ck"><input type="checkbox" id="s-sh" checked><span>Shuffle questions</span></label>
-        <label class="ck"><input type="checkbox" id="s-rv"><span>Show explanation after each answer</span></label>
+
+    <!-- 중3 -->
+    <button class="grade-btn z3-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📙</div>
+      <div class="grade-label">
+        <div class="grade-label-main">중학교 3학년</div>
+        <div class="grade-label-sub">Middle School Year 3</div>
       </div>
-      <div style="margin-top:.6rem;font-size:13px;color:var(--ink2);">
-        Name: <input type="text" id="s-name" placeholder="이름을 입력하세요 *" style="width:180px;margin-left:6px;border:1.5px solid var(--bds);" required>
-        <span style="font-size:11px;color:var(--red);margin-left:4px;">* 필수</span>
+      <div class="grade-count">1 quiz</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner z3">
+
+        <!-- 교과서 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📖 교과서</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <button class="year-btn" onclick="toggleYear(this)">
+              <span class="year-label">동아(윤정미)</span>
+              <span class="year-arrow">▶</span>
+            </button>
+            <div class="year-body">
+              <div class="year-inner">
+                <div class="cards">
+                  <a class="card" href="https://doors1965.github.io/middleschool_English_3rd_grade/" target="_blank">
+                    <div class="card-stripe"></div>
+                    <div class="card-body">
+                      <div class="card-title">동아(윤정미) 개정 중3 영어</div>
+                      <div class="card-meta">
+                        <span class="tag">Lessons 1–2</span>
+                        <span class="tag">95 words</span>
+                        <span class="tag">Follow Your Dream · Food for the Heart</span>
+                      </div>
+                    </div>
+                    <div class="card-arrow">→</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 추가지문 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📄 추가지문</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
       </div>
     </div>
-    <button class="btn btn-g" id="s-start" style="width:100%;padding:13px;font-size:15px;">Start Quiz →</button>
-    <div class="st" id="s-status"></div>
+
+  </div><!-- end 중학교 school-block -->
+
+  <!-- ══ 고등학교 ══ -->
+  <div class="school-block">
+    <div class="school-header">
+      <span class="school-icon">🎓</span>
+      <span class="school-title">고등학교 High School</span>
+    </div>
+
+    <!-- 고1 -->
+    <button class="grade-btn g1-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📕</div>
+      <div class="grade-label">
+        <div class="grade-label-main">고등학교 1학년</div>
+        <div class="grade-label-sub">High School Year 1</div>
+      </div>
+      <div class="grade-count">1 quiz</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner g1">
+
+        <!-- 교과서 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📖 교과서</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+                <!-- 학력평가 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📝 학력평가</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <button class="year-btn" onclick="toggleYear(this)">
+              <span class="year-label">📅 2026학년도</span>
+              <span class="year-arrow">▶</span>
+            </button>
+            <div class="year-body">
+              <div class="year-inner">
+                <div class="cards">
+                  <a class="card" href="https://doors1965.github.io/vocab-quiz--1-2026-3/" target="_blank">
+                    <div class="card-stripe"></div>
+                    <div class="card-body">
+                      <div class="card-title">2026학년도 3월 고1 전국연합학력평가</div>
+                      <div class="card-meta">
+                        <span class="tag">Q18–Q45</span>
+                        <span class="tag">175 words</span>
+                        <span class="tag">2026년 3월 모의고사</span>
+                      </div>
+                    </div>
+                    <div class="card-arrow">→</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 부교재 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📚 부교재</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 고2 -->
+    <button class="grade-btn g2-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📔</div>
+      <div class="grade-label">
+        <div class="grade-label-main">고등학교 2학년</div>
+        <div class="grade-label-sub">High School Year 2</div>
+      </div>
+      <div class="grade-count">4 quizzes</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner g2">
+
+        <!-- 교과서 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📖 교과서</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <button class="subject-btn" onclick="toggleSubject(this)">
+              <span class="subject-label">영어Ⅰ</span>
+              <span class="subject-arrow">▶</span>
+            </button>
+            <div class="subject-body">
+              <div class="subject-inner">
+                <button class="year-btn" onclick="toggleYear(this)">
+                  <span class="year-label">능률(오선영)</span>
+                  <span class="year-arrow">▶</span>
+                </button>
+                <div class="year-body">
+                  <div class="year-inner">
+                    <div class="cards">
+                      <a class="card" href="https://doors1965.github.io/vocab-quiz-high-school-2-English-1-neungyul-osun/" target="_blank">
+                        <div class="card-stripe"></div>
+                        <div class="card-body">
+                          <div class="card-title">능률(오선영) 고2 영어Ⅰ — Lessons 1–5</div>
+                          <div class="card-meta">
+                            <span class="tag">L1–L5</span>
+                            <span class="tag">202 words</span>
+                            <span class="tag">B1–C1</span>
+                          </div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 학력평가 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📝 학력평가</span>
+          <span class="sub-count">1 quiz</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <button class="year-btn" onclick="toggleYear(this)">
+              <span class="year-label">📅 2026학년도</span>
+              <span class="year-arrow">▶</span>
+            </button>
+            <div class="year-body">
+              <div class="year-inner">
+                <div class="cards">
+                  <a class="card" href="https://doors1965.github.io/-vocab-quiz/" target="_blank">
+                    <div class="card-stripe"></div>
+                    <div class="card-body">
+                      <div class="card-title">2026학년도 3월 고2 전국연합학력평가</div>
+                      <div class="card-meta">
+                        <span class="tag">Q18–Q45</span>
+                        <span class="tag">175 words</span>
+                        <span class="tag">2026년 3월 모의고사</span>
+                      </div>
+                    </div>
+                    <div class="card-arrow">→</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 부교재 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📚 부교재</span>
+          <span class="sub-count">2 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner">
+            <div class="cards">
+              <a class="card" href="https://doors1965.github.io/vocab-quiz-KSAT-miniQ-Start/" target="_blank">
+                <div class="card-stripe"></div>
+                <div class="card-body">
+                  <div class="card-title">EBS 수능특강 Q 미니모의고사 영어 Start — 01~14회</div>
+                  <div class="card-meta">
+                    <span class="tag">01~14회</span>
+                    <span class="tag">687 words</span>
+                    <span class="tag">B1–C1 · Phrasal verbs & Idioms</span>
+                  </div>
+                </div>
+                <div class="card-arrow">→</div>
+              </a>
+              <a class="card" href="https://doors1965.github.io/vocab-quiz-KSAT-miniQ-Jump" target="_blank">
+                <div class="card-stripe"></div>
+                <div class="card-body">
+                  <div class="card-title">EBS 수능특강 Q 미니모의고사 영어 Jump — 01~14회</div>
+                  <div class="card-meta">
+                    <span class="tag">01~14회</span>
+                    <span class="tag">290 words</span>
+                    <span class="tag">B1–C1 · Phrasal verbs & Idioms</span>
+                  </div>
+                </div>
+                <div class="card-arrow">→</div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 고3 -->
+    <button class="grade-btn g3-btn" onclick="toggle(this)">
+      <div class="grade-icon-wrap">📓</div>
+      <div class="grade-label">
+        <div class="grade-label-main">고등학교 3학년</div>
+        <div class="grade-label-sub">High School Year 3</div>
+      </div>
+      <div class="grade-count">0 quizzes</div>
+      <div class="grade-arrow">▶</div>
+    </button>
+    <div class="grade-body">
+      <div class="grade-inner g3">
+
+        <!-- 교과서 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📖 교과서</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+        <!-- 학력평가 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📝 학력평가</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+        <!-- 수학능력시험 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">🎯 수학능력시험</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+        <!-- 부교재 -->
+        <button class="sub-btn" onclick="toggleSub(this)">
+          <span class="sub-label">📚 부교재</span>
+          <span class="sub-count">0 quizzes</span>
+          <span class="sub-arrow">▶</span>
+        </button>
+        <div class="sub-body">
+          <div class="sub-inner"><div class="sub-empty">🔧 준비 중입니다.</div></div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
-  <div id="s-quiz" style="display:none;">
-    <div class="lscore">
-      <div class="ls"><span id="ls-c">0</span>Correct ✓</div>
-      <div class="ls"><span id="ls-w">0</span>Wrong ✗</div>
-      <div class="ls"><span id="ls-r">—</span>Left</div>
-      <div class="ls"><span id="ls-p">—</span>Score</div>
-    </div>
-    <div class="prog-t"><div class="prog-f" id="prog" style="width:0%"></div></div>
-    <div id="q-container"></div>
-    <div class="brow" style="margin-top:1rem;">
-      <button class="btn btn-s" id="s-reveal">Reveal all</button>
-      <button class="btn btn-p" id="s-results">See results →</button>
-    </div>
-  </div>
+</div>
 
-  <div id="s-score" style="display:none;">
-    <div class="card">
-      <div style="text-align:right;margin-bottom:.25rem;">
-        <span id="sc-tasktype" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;background:#E3EEF7;color:#1A3A5C;"></span>
-      <div id="sc-selection" style="display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:.6rem;margin-top:.4rem;"></div>
-      </div>
-      <div class="score-emoji" id="sc-emoji"></div>
-      <div class="score-big" id="sc-pct"></div>
-      <div class="score-sub" id="sc-sub"></div>
-      <div style="font-size:12px;color:var(--ink2);font-weight:700;text-align:center;margin-bottom:.75rem;" id="sc-datetime"></div>
-      <div id="sc-encourage" style="font-size:13px;font-weight:600;padding:10px 14px;border-radius:10px;text-align:center;margin-bottom:1rem;border:1.5px solid;"></div>
-      <div class="sgrid" id="sc-grid"></div>
-    </div>
-    <div class="card">
-      <div class="ct">Wrong answers — review</div>
-      <div id="sc-review"></div>
-    </div>
-    <div class="brow">
-      <button class="btn btn-p" id="sc-retry">Try again ↺</button>
-      <button class="btn btn-s" id="sc-new">New quiz</button>
-      <button class="btn btn-s" id="sc-print" onclick="printResult()" style="background:#1E6B3C;color:#fff;border-color:#1E6B3C;">🖨 Save / Print</button>
-    </div>
-  </div>
+<div class="footer">
+  영어과 · 제작: doors1965 · Powered by Claude
 </div>
 
 <script>
-var WL=[
-["career","n.","직업, 경력","Choosing a career is one of the biggest life decisions young people face.","L1-Intro"],
-["map out","phrasal v.","~을 계획하다, 구체화하다","Mapping out the right career path can be demanding.","L1-Intro"],
-["demanding","adj.","어려운, 힘든","Mapping out the right career path can be demanding.","L1-Intro"],
-["vision","n.","비전, 계획","While some teenagers have a clear vision of their career goals, others struggle to define them.","L1-Intro"],
-["struggle to","phrasal v.","~하는 데 어려움을 겪다","While some teenagers have a clear vision of their career goals, others struggle to define them.","L1-Intro"],
-["role model","n. phrase","롤모델, 귀감이 되는 사람","This is where role models can be useful.","L1-Intro"],
-["guidance","n.","지도, 안내","They help young people start to plan their careers by providing them with guidance and the sense of purpose they need to succeed.","L1-Intro"],
-["sense of purpose","n. phrase","목적의식","They help young people start to plan their careers by providing them with guidance and the sense of purpose they need to succeed.","L1-Intro"],
-["quality","n.","자질, 특성","We asked our teenage readers about their role models and the qualities they admire most in them.","L1-Intro"],
-["profound","adj.","엄청난, 심오한","After you read each student's story, you will get a better idea of the profound impact role models can have when it comes to shaping career goals.","L1-Intro"],
-["when it comes to","idiom","~에 관해서, ~에 있어서","After you read each student's story, you will get a better idea of the profound impact role models can have when it comes to shaping career goals.","L1-Intro"],
-["dedicate A to B","phrasal v.","A를 B에 바치다","He dedicated his life to exploring and documenting the wonders of the underwater world.","L1-Minji"],
-["document","v.","기록하다","He dedicated his life to exploring and documenting the wonders of the underwater world.","L1-Minji"],
-["intrigued","adj.","호기심을 느끼는, 흥미를 느끼는","He became intrigued by the mysteries of the ocean, and he wanted to explore further.","L1-Minji"],
-["insufficient","adj.","불충분한, 부적합한","However, the diving equipment available at that time was insufficient.","L1-Minji"],
-["instead of","prep. phrase","~ 대신에","Instead of giving up, Cousteau decided to create his own equipment.","L1-Minji"],
-["a series of","n. phrase","일련의","After a long series of failed attempts, he finally succeeded in developing a portable breathing device, which he called the \"Aqua-Lung.\"","L1-Minji"],
-["portable","adj.","휴대용의","After a long series of failed attempts, he finally succeeded in developing a portable breathing device, which he called the \"Aqua-Lung.\"","L1-Minji"],
-["compelling","adj.","흥미로운, 매력적인","Cousteau shared his underwater experiences with the world in a compelling documentary film released in 1956.","L1-Minji"],
-["transform","v.","바꾸다, 변화시키다","It transformed people's perceptions of the ocean and promoted the need for marine conservation.","L1-Minji"],
-["perception","n.","인식","It transformed people's perceptions of the ocean and promoted the need for marine conservation.","L1-Minji"],
-["marine conservation","n. phrase","해양 보존","It transformed people's perceptions of the ocean and promoted the need for marine conservation.","L1-Minji"],
-["curiosity","n.","호기심","Cousteau's curiosity drove him to constantly challenge himself in new areas, and his passion enabled him to make the impossible a reality.","L1-Minji"],
-["passion","n.","열정","Cousteau's curiosity drove him to constantly challenge himself in new areas, and his passion enabled him to make the impossible a reality.","L1-Minji"],
-["push the boundaries","idiom","한계를 뛰어넘다","Cousteau's life story inspired me to push the boundaries of what I can do.","L1-Minji"],
-["notable","adj.","저명한, 주목할 만한","You may not have heard of her, but she was a notable zoologist who specialized in reptiles in the early 20th century.","L1-Sunho"],
-["zoologist","n.","동물학자","You may not have heard of her, but she was a notable zoologist who specialized in reptiles in the early 20th century.","L1-Sunho"],
-["specialize in","phrasal v.","~을 전문으로 하다","You may not have heard of her, but she was a notable zoologist who specialized in reptiles in the early 20th century.","L1-Sunho"],
-["devotion","n.","전념, 헌신","She taught me that devotion to a particular field is important for shaping one's career.","L1-Sunho"],
-["immerse oneself in","phrasal v.","~에 몰두하다","Procter immersed herself in the exploration of nature and animals.","L1-Sunho"],
-["brilliant","adj.","뛰어난, 훌륭한","She was a brilliant student, but health problems prevented her from attending university.","L1-Sunho"],
-["prevent A from B","phrasal v.","A가 B하는 것을 막다","She was a brilliant student, but health problems prevented her from attending university.","L1-Sunho"],
-["accumulate","v.","쌓다, 축적하다","Procter accumulated extensive knowledge of zoology.","L1-Sunho"],
-["extensive","adj.","광범위한","Procter accumulated extensive knowledge of zoology.","L1-Sunho"],
-["prominent","adj.","유명한, 저명한","She began exchanging letters with George Boulenger, a prominent expert on reptiles, in order to share ideas.","L1-Sunho"],
-["impressed","adj.","깊은 인상을 받은","He was so impressed that he hired her as his assistant at the British Museum.","L1-Sunho"],
-["curator","n.","큐레이터, 관리자","A few years later, she became the first female curator of reptiles at the London Zoo.","L1-Sunho"],
-["contribute to","phrasal v.","~에 기여하다","There, she actively contributed to the design of the Reptile House by incorporating new technology that allowed for better care and breeding of wild animals.","L1-Sunho"],
-["incorporate","v.","포함시키다, 도입하다","There, she actively contributed to the design of the Reptile House by incorporating new technology that allowed for better care and breeding of wild animals.","L1-Sunho"],
-["breeding","n.","번식","There, she actively contributed to the design of the Reptile House by incorporating new technology that allowed for better care and breeding of wild animals.","L1-Sunho"],
-["rewarding","adj.","보람 있는","If I am fortunate, one of my passions might someday lead to a rewarding career.","L1-Sunho"],
-["enthusiastic","adj.","열정적인","From a young age, Kim was enthusiastic about drawing.","L1-Yubin"],
-["disrupt","v.","방해하다, 지장을 주다","However, his dream of studying art in college was disrupted when he was diagnosed with color vision deficiency during high school.","L1-Yubin"],
-["diagnose","v.","진단하다","However, his dream of studying art in college was disrupted when he was diagnosed with color vision deficiency during high school.","L1-Yubin"],
-["misfortune","n.","불행, 불운","Surprisingly, he didn't allow this misfortune to discourage him.","L1-Yubin"],
-["discourage","v.","낙담시키다, 의욕을 꺾다","Surprisingly, he didn't allow this misfortune to discourage him.","L1-Yubin"],
-["view A as B","phrasal v.","A를 B로 여기다","Instead, he simply viewed his condition as a minor issue that could happen to anyone.","L1-Yubin"],
-["portfolio","n.","포트폴리오","He found out that some animators work only in pencil, so he sent his portfolio to all the animation studios in Korea.","L1-Yubin"],
-["give credit for","phrasal v.","~을 높이 평가하다","I give him a lot of credit for his persistence and his attitude toward the challenges in his life.","L1-Yubin"],
-["persistence","n.","끈기, 인내","I give him a lot of credit for his persistence and his attitude toward the challenges in his life.","L1-Yubin"],
-["encounter","v.","맞닥뜨리다, 마주치다","If I encounter difficulties, I will simply find another way to pursue them, just as he did.","L1-Yubin"],
-["emphasize","v.","강조하다","These stories shared by our readers emphasize the importance of role models in guiding teenagers toward their career goals.","L1-Closing"],
-["regardless of","prep. phrase","~에 상관없이","Role models, regardless of their field, inspire us because they possess qualities like persistence, commitment, and optimism.","L1-Closing"],
-["possess","v.","가지다, 지니다","Role models, regardless of their field, inspire us because they possess qualities like persistence, commitment, and optimism.","L1-Closing"],
-["commitment","n.","헌신, 전념","Role models, regardless of their field, inspire us because they possess qualities like persistence, commitment, and optimism.","L1-Closing"],
-["optimism","n.","낙관주의","Role models, regardless of their field, inspire us because they possess qualities like persistence, commitment, and optimism.","L1-Closing"],
-["neuroscience","n.","신경 과학","Dr. Caitlin Yoon, a professor of neuroscience at Central University, is here with us today to talk about how we can become better thinkers.","L2"],
-["suppose","v.","가정하다","Suppose you go into a store to purchase a notebook and a pen.","L2"],
-["reveal","v.","드러내다, 보여주다","This simple question reveals the fundamental way that our brains work.","L2"],
-["fundamental","adj.","근본적인","This simple question reveals the fundamental way that our brains work.","L2"],
-["utilize","v.","활용하다, 이용하다","They actually have two different systems that they can utilize: System 1 and System 2.","L2"],
-["instinct","n.","본능","System 1 is based on instinct, and it works without our conscious control.","L2"],
-["conscious","adj.","의식적인","System 1 is based on instinct, and it works without our conscious control.","L2"],
-["countless","adj.","무수히 많은","Our brains naturally apply this system in countless everyday situations, such as when we hear simple sentences, see large words on advertisements, or encounter easy questions like \"2+2=?\".","L2"],
-["enormous","adj.","엄청난","This system works very quickly, because it needs to continuously process enormous amounts of information coming in through our senses.","L2"],
-["reasoning","n.","추론","System 2 is responsible for our reasoning and deeper decision-making processes.","L2"],
-["decision-making","n.","의사 결정","System 2 is responsible for our reasoning and deeper decision-making processes.","L2"],
-["validity","n.","타당성","Our brains use this system when we compare the prices and features of products, check the validity of an argument, or encounter difficult questions like \"238×79×451=?\".","L2"],
-["reliable","adj.","믿을 만한","However, while System 2 is more reliable, its application requires time and effort.","L2"],
-["reflect","v.","곰곰이 생각하다","If you got the right answer to the notebook and pen question after taking a few seconds to reflect, then your brain used System 2 to check System 1's initial response.","L2"],
-["tend to","phrasal v.","~하는 경향이 있다","However, our brains tend to rely heavily on taking mental shortcuts with System 1.","L2"],
-["mental shortcut","n. phrase","정신적 지름길","However, our brains tend to rely heavily on taking mental shortcuts with System 1.","L2"],
-["dependable","adj.","믿을 수 있는","So, Doctor, why do we rely on these mental shortcuts when System 1 is not as dependable as System 2?","L2"],
-["reasonable","adj.","합리적인","So it's quite reasonable and effective for the brain to be a bit lazy sometimes.","L2"],
-["critical","adj.","중요한, 결정적인","Having a lazy brain allows us to save energy for critical tasks that require our focus and attention.","L2"],
-["reliant on","adj.","~에 의존하는","If your brain becomes too reliant on System 1, it will not be able to apply System 2 when you confront a problem that requires intense concentration.","L2"],
-["confront","v.","직면하다","If your brain becomes too reliant on System 1, it will not be able to apply System 2 when you confront a problem that requires intense concentration.","L2"],
-["intense","adj.","고도의, 강렬한","If your brain becomes too reliant on System 1, it will not be able to apply System 2 when you confront a problem that requires intense concentration.","L2"],
-["concentration","n.","집중력","If your brain becomes too reliant on System 1, it will not be able to apply System 2 when you confront a problem that requires intense concentration.","L2"],
-["essential","adj.","필수적인","System 2 is essential for exercising human intelligence, so the less you use it, the more likely you are to become a lazy thinker.","L2"],
-["overly","adv.","지나치게","Those who have an overly lazy brain frequently make errors and bad decisions.","L2"],
-["deliberate","adj.","의도적인","We can make a deliberate effort to practice thinking deeply with System 2 more often.","L2"],
-["reconsider","v.","다시 생각하다","Reconsider your initial thoughts instead of accepting them right away.","L2"],
-["generate","v.","만들어 내다, 생각해 내다","Keep generating more ideas and carefully compare the available options before making a decision.","L2"],
-["motivate","v.","동기를 부여하다","Curiosity can motivate us to investigate unfamiliar topics and ideas.","L2"],
-["investigate","v.","조사하다","Curiosity can motivate us to investigate unfamiliar topics and ideas.","L2"],
-["multiple angles","n. phrase","다양한 관점","It encourages us to dive deeper into a subject and explore it from multiple angles.","L2"],
-["foundation","n.","토대, 기초","Therefore, it can serve as a foundation for building deeper thinking habits.","L2"],
-["stimulate","v.","자극하다","Finally, learn something new in order to stimulate your brain and become more intelligent.","L2"],
-["efficiently","adv.","효율적으로","These new activities will create new paths that allow information to flow through your brain more efficiently.","L2"],
-["creature of habit","idiom","습관의 동물","We are creatures of habit, so it is vitally important that we develop well-balanced thinking habits.","L2"],
-["well-balanced","adj.","균형 잡힌","We are creatures of habit, so it is vitally important that we develop well-balanced thinking habits.","L2"],
-["alert","adj.","경계하는, 주의하는","We should remain alert so that we do not fall into the trap of making careless decisions.","L2"],
-["fall into the trap","idiom","함정에 빠지다","We should remain alert so that we do not fall into the trap of making careless decisions.","L2"],
-["harmoniously","adv.","조화롭게","We should invest time into learning how to think deeply in order to use both System 1 and System 2 harmoniously.","L2"],
-["reinforce","v.","강화하다","That way, instead of developing a habit of relying too much on a lazy brain, you can exercise your intelligence and reinforce your mental capabilities.","L2"],
-["capability","n.","능력, 역량","That way, instead of developing a habit of relying too much on a lazy brain, you can exercise your intelligence and reinforce your mental capabilities.","L2"],
-["resident","n.","거주자","It is a care center that houses more than 160 elderly residents who require assistance.","L3-Jacob"],
-["assistance","n.","도움, 지원","It is a care center that houses more than 160 elderly residents who require assistance.","L3-Jacob"],
-["intergenerational","adj.","세대 간의","This unique \"intergenerational living\" project began in 2012, after budget cuts reduced the amount of money care homes in the Netherlands received.","L3-Jacob"],
-["budget cut","n. phrase","예산 삭감","This unique \"intergenerational living\" project began in 2012, after budget cuts reduced the amount of money care homes in the Netherlands received.","L3-Jacob"],
-["funding","n.","자금, 재정 지원","This funding reduction led to the loss of many essential elderly care programs, including social, educational, and counseling services.","L3-Jacob"],
-["counseling","n.","상담","This funding reduction led to the loss of many essential elderly care programs, including social, educational, and counseling services.","L3-Jacob"],
-["affordable","adj.","저렴한, 감당할 수 있는","Humanitas needed to seek an affordable solution to fill the gap left by the removal of these services.","L3-Jacob"],
-["numerous","adj.","수많은","Since the building had numerous empty rooms available, the director decided to offer local university students free accommodations in return for spending time with the elderly residents.","L3-Jacob"],
-["accommodation","n.","거처, 숙소","Since the building had numerous empty rooms available, the director decided to offer local university students free accommodations in return for spending time with the elderly residents.","L3-Jacob"],
-["in return for","prep. phrase","~의 대가로","Since the building had numerous empty rooms available, the director decided to offer local university students free accommodations in return for spending time with the elderly residents.","L3-Jacob"],
-["win-win situation","n. phrase","모두에게 유리한 상황","Many students were struggling to afford the area's high rents, so the proposal was a true win-win situation.","L3-Jacob"],
-["intriguing","adj.","흥미진진한","Now, let's hear more about this intriguing place from two of the residents.","L3-Jacob"],
-["live-in","adj.","입주하는","As a live-in student, I'm required to spend at least 30 hours per month with my elderly neighbors in exchange for free accommodations.","L3-Jacob"],
-["in exchange for","prep. phrase","~의 대가로","As a live-in student, I'm required to spend at least 30 hours per month with my elderly neighbors in exchange for free accommodations.","L3-Jacob"],
-["hang out","phrasal v.","함께 시간을 보내다","Sometimes I teach them things, such as how to use social media, and other times I just hang out with them.","L3-Jacob"],
-["acquire","v.","얻다, 습득하다","With so much experience gathered over a lifetime, they possess knowledge that I have yet to acquire.","L3-Jacob"],
-["casual chat","n. phrase","가벼운 대화","For example, I've learned the value of having a casual chat over a cup of coffee from them.","L3-Jacob"],
-["take a break from","phrasal v.","~에서 벗어나 쉬다","It's a really great way to take a break from rushing around all the time.","L3-Jacob"],
-["feel sorry for","phrasal v.","~에 대해 안타까움을 느끼다","I used to feel sorry for the elderly because I focused only on the things they can't do.","L3-Jacob"],
-["meaningful","adj.","의미 있는","I've made deep, meaningful friendships that I'll never forget here.","L3-Jacob"],
-["transformative","adj.","변화를 가져오는","Living here has changed my life in ways I never thought possible, and I'm really grateful for this transformative experience.","L3-Jacob"],
-["energetic","adj.","활기찬","The students here are energetic, friendly, and caring.","L3-Helena"],
-["decent","adj.","괜찮은","Humanitas was already a decent place to live before the students arrived, but it has become a lot more fun since they moved in.","L3-Helena"],
-["go through","phrasal v.","겪다, 경험하다","Last year, she went through a difficult time of grief after she lost her father, so I did what came naturally.","L3-Helena"],
-["grief","n.","슬픔, 비통함","Last year, she went through a difficult time of grief after she lost her father, so I did what came naturally.","L3-Helena"],
-["come naturally","idiom","자연스럽게 하게 되다","I did what came naturally.","L3-Helena"],
-["comfort","n.","위로","She later told me that I was a great comfort during that difficult time, which made me feel very good.","L3-Helena"],
-["capable of","adj.","~을 할 수 있는","It always feels nice to be reminded that I'm still capable of doing things for others.","L3-Helena"],
-["vibrant","adj.","활기찬","But having young, vibrant people around helps me forget about the pain and enjoy my life!","L3-Helena"],
-["youthful","adj.","젊은, 젊음의","The older residents gain a more youthful perspective on life, while the younger residents receive valuable life lessons.","L3-Helena"],
-["perspective","n.","관점","The older residents gain a more youthful perspective on life, while the younger residents receive valuable life lessons.","L3-Helena"],
-["harmony","n.","조화","More and more care homes around Europe are now trying intergenerational living, bringing the young and old together in harmony.","L3-Helena"],
-["extraordinary","adj.","비상한, 특별한","By doing so, we are turning the ordinary into something extraordinary — something that has never been seen before.","L4-Arcimboldo"],
-["ordinary","adj.","평범한","Some artists, for example, spark their creativity by looking closely at ordinary objects.","L4-Arcimboldo"],
-["spark","v.","촉발하다, 불러일으키다","Some artists, for example, spark their creativity by looking closely at ordinary objects.","L4-Arcimboldo"],
-["depict","v.","묘사하다","They both depict the same person, Holy Roman Emperor Rudolf II.","L4-Arcimboldo"],
-["unconventional","adj.","색다른, 관습에 얽매이지 않는","However, the one on the right, called Vertumnus, is very unconventional.","L4-Arcimboldo"],
-["striking","adj.","눈에 띄는, 인상적인","The painting shows striking creativity and originality.","L4-Arcimboldo"],
-["originality","n.","독창성","The painting shows striking creativity and originality.","L4-Arcimboldo"],
-["arrange","v.","배열하다","Fruits, flowers, and vegetables are arranged like the pieces of a puzzle to create a human head.","L4-Arcimboldo"],
-["representative","adj.","대표적인","This painting is representative of the artist's signature style of \"composite portraits.\"","L4-Arcimboldo"],
-["reversible","adj.","뒤집을 수 있는","Another good example of Arcimboldo's unique creativity can be found in The Gardener, one of his \"reversible\" paintings.","L4-Arcimboldo"],
-["still life","n. phrase","정물화","When viewed normally, it is just an ordinary still life of vegetables in a bowl.","L4-Arcimboldo"],
-["flip upside down","phrasal v.","거꾸로 뒤집다","However, when flipped upside down, it is magically transformed into a smiling face!","L4-Arcimboldo"],
-["adjustment","n.","수정, 조정","Their research showed that he first painted them as still life paintings and then turned them upside down and made some adjustments to create faces.","L4-Arcimboldo"],
-["interactive","adj.","상호작용적인","It was probably because he wanted to add an interactive element to his work by doing so.","L4-Arcimboldo"],
-["innovative","adj.","혁신적인","His innovative approach to art inspired many great artists who came after him, including Pablo Picasso, Salvador Dalí, and René Magritte.","L4-Arcimboldo"],
-["illusion","n.","착시, 환상","Using everyday items, she creates playful visual illusions that force you to look twice in order to confirm what you have just seen.","L4-Stentzel"],
-["witty","adj.","재치 있는","This witty and amusing creation is actually a work of art created by the visual artist Helga Stentzel.","L4-Stentzel"],
-["household","adj.","가정용의","Her unique style has been called \"household surrealism.\"","L4-Stentzel"],
-["inspiration","n.","영감","She got inspiration for the series while she was hanging her laundry.","L4-Stentzel"],
-["come up with","phrasal v.","~을 생각해 내다","Stentzel says she came up with the concept of Crunchie while putting together a salad for her family.","L4-Stentzel"],
-["keen","adj.","예리한, 강렬한","This keen observation is what enables her to continuously produce creative and imaginative works of art.","L4-Stentzel"],
-["observation","n.","관찰","This keen observation is what enables her to continuously produce creative and imaginative works of art.","L4-Stentzel"],
-["exceptional","adj.","특출난, 예외적인","Creativity is not some kind of exceptional skill that belongs to exclusive groups of people.","L4-Stentzel"],
-["constantly","adv.","끊임없이","Whether we realize it or not, we are constantly using our creativity to adapt, adjust, and rearrange the things around us.","L4-Stentzel"],
-["rearrange","v.","재배열하다","Whether we realize it or not, we are constantly using our creativity to adapt, adjust, and rearrange the things around us.","L4-Stentzel"],
-["glance","n.","힐끗 봄","Take a look at the things around you, but don't just give them a quick glance.","L4-Stentzel"],
-["center around","phrasal v.","~을 중심으로 돌아가다","Her life centered around swimming.","L5"],
-["represent","v.","대표하다","She got the chance to represent Syria in an international swimming championship, and it seemed like her Olympic dream might someday come true.","L5"],
-["turn upside down","idiom","뒤집어 놓다","However, Yusra had no idea that her life would soon be turned upside down by the horrors of the Syrian civil war, which had broken out in 2011.","L5"],
-["horror","n.","공포","However, Yusra had no idea that her life would soon be turned upside down by the horrors of the Syrian civil war, which had broken out in 2011.","L5"],
-["break out","phrasal v.","발발하다","However, Yusra had no idea that her life would soon be turned upside down by the horrors of the Syrian civil war, which had broken out in 2011.","L5"],
-["risky","adj.","위험한","Over the next few years, normal activities like going to school became risky.","L5"],
-["chaos","n.","혼란","Through all of this chaos, she clung to her dream and kept swimming.","L5"],
-["cling to","phrasal v.","~에 매달리다","Through all of this chaos, she clung to her dream and kept swimming.","L5"],
-["fateful","adj.","운명적인","One fateful day, a bomb fell in the pool where she was training.","L5"],
-["wake-up call","n. phrase","경각심을 불러일으키는 사건","Although it did not explode, this incident was horrifying enough to be a wake-up call for Yusra and her sister Sara.","L5"],
-["make up one's mind","idiom","결심하다","They realized that they could no longer stay in their home country, and they made up their minds to flee Syria and go to Germany to avoid the war.","L5"],
-["flee","v.","달아나다, 도망치다","They realized that they could no longer stay in their home country, and they made up their minds to flee Syria and go to Germany to avoid the war.","L5"],
-["pursue","v.","추구하다","Yusra knew that it was her only option if she wanted to pursue her dream and live without fear.","L5"],
-["board","v.","탑승하다","There, along with 18 other people, including children and babies, they boarded a tiny boat designed for seven passengers.","L5"],
-["disaster","n.","재앙","They were heading across the sea towards Greece when disaster struck.","L5"],
-["sink","v.","가라앉다","The heavy boat began to sink, and the panicked, desperate passengers had no choice but to throw their possessions into the sea.","L5"],
-["panicked","adj.","겁에 질린","The heavy boat began to sink, and the panicked, desperate passengers had no choice but to throw their possessions into the sea.","L5"],
-["desperate","adj.","필사적인","The heavy boat began to sink, and the panicked, desperate passengers had no choice but to throw their possessions into the sea.","L5"],
-["possession","n.","소지품","The heavy boat began to sink, and the panicked, desperate passengers had no choice but to throw their possessions into the sea.","L5"],
-["treasured","adj.","소중한","Yusra felt heartbroken as she watched people's treasured belongings disappear under the waves.","L5"],
-["belonging","n.","소지품, 소유물","Yusra felt heartbroken as she watched people's treasured belongings disappear under the waves.","L5"],
-["drifting","adj.","표류하는","She jumped into the water along with Sara and two others, and the four of them guided the drifting boat.","L5"],
-["exhausted","adj.","지친","No matter how exhausted they were, they kept moving.","L5"],
-["overwhelming","adj.","엄청난, 압도적인","At the end of this overwhelming 25-day journey, they finally made it to Germany and settled at a refugee center in Berlin.","L5"],
-["make it to","phrasal v.","~에 (힘겹게) 도착하다","At the end of this overwhelming 25-day journey, they finally made it to Germany and settled at a refugee center in Berlin.","L5"],
-["settle","v.","정착하다","At the end of this overwhelming 25-day journey, they finally made it to Germany and settled at a refugee center in Berlin.","L5"],
-["hardship","n.","어려움, 고난","Despite all the hardships and adversities she underwent, Yusra's passion for swimming never left her.","L5"],
-["adversity","n.","역경","Despite all the hardships and adversities she underwent, Yusra's passion for swimming never left her.","L5"],
-["undergo","v.","겪다, 경험하다","Despite all the hardships and adversities she underwent, Yusra's passion for swimming never left her.","L5"],
-["feel at home","idiom","편안함을 느끼다","In fact, it was the only thing she could do to feel at home in this foreign land.","L5"],
-["take up","phrasal v.","(활동을) 시작하다","She decided to take up training again, and she started looking for a coach in Berlin who could help her reach her full potential.","L5"],
-["potential","n.","잠재력","She decided to take up training again, and she started looking for a coach in Berlin who could help her reach her full potential.","L5"],
-["recognize","v.","알아보다, 인식하다","When he saw her swim, he immediately recognized her outstanding talent and agreed to do so.","L5"],
-["outstanding","adj.","뛰어난","When he saw her swim, he immediately recognized her outstanding talent and agreed to do so.","L5"],
-["persistent","adj.","끈질긴, 끈기 있는","Sven helped Yusra stay focused and persistent in her efforts to pursue excellence.","L5"],
-["pay off","phrasal v.","성과를 내다, 결실을 맺다","Following his instructions, Yusra trained hard day and night, hoping her efforts would pay off one day.","L5"],
-["hesitant","adj.","망설이는","Although it seemed like a great opportunity, Yusra was hesitant.","L5"],
-["pity","n.","연민","If she joined the refugee team, she thought, people might view her with pity instead of seeing her as a serious athlete.","L5"],
-["turn down","phrasal v.","거절하다","She almost turned down the invitation, but she decided to accept it after she realized that she could inspire hope in millions of other refugees facing similar challenges.","L5"],
-["inspire","v.","영감을 주다, 희망을 심어주다","She almost turned down the invitation, but she decided to accept it after she realized that she could inspire hope in millions of other refugees facing similar challenges.","L5"],
-["refugee","n.","난민","She almost turned down the invitation, but she decided to accept it after she realized that she could inspire hope in millions of other refugees facing similar challenges.","L5"],
-["determined","adj.","굳게 결심한","When she stepped onto the starting blocks, she was determined to pour everything she had into the competition.","L5"],
-["pour into","phrasal v.","~에 쏟아붓다","When she stepped onto the starting blocks, she was determined to pour everything she had into the competition.","L5"],
-["make history","idiom","새로운 역사를 만들다","Even though she left the Olympics without a medal, she was proud to have made history alongside her teammates.","L5"],
-["remark","v.","말하다, 언급하다","In one interview, when a reporter asked if she could make a statement, she remarked, \"I want everyone to stay strong for their goals in life, because if you have your goals in front of your eyes, you will do everything you can; and I think even if I fail, I will try again. I want to show everybody that it's hard to arrive at your dreams, but it's not impossible. You can do it; everyone can do it.\"","L5"]
-];
-
-var DEFS={};
-
-var KO_SENT={
-"Choosing a career is one of the biggest life decisions young people face.":"직업을 선택하는 것은 젊은 사람들이 직면하는 인생의 가장 큰 결정 중 하나이다.",
-"Mapping out the right career path can be demanding.":"올바른 진로를 계획하는 것은 어려울 수 있다.",
-"While some teenagers have a clear vision of their career goals, others struggle to define them.":"어떤 10대들은 직업 목표에 대해 뚜렷한 비전이 있는 반면, 다른 청소년들은 직업 목표를 정하는 것을 어려워한다.",
-"This is where role models can be useful.":"이럴 때 롤모델이 도움이 될 수 있다.",
-"They help young people start to plan their careers by providing them with guidance and the sense of purpose they need to succeed.":"그들은 청소년들에게 지도와 성공하는 데 필요한 목적의식을 제공함으로써 그들이 진로 계획을 시작하도록 도와준다.",
-"We asked our teenage readers about their role models and the qualities they admire most in them.":"우리는 10대 독자들에게 그들의 롤모델과 롤모델에게서 가장 존경하는 자질에 대해 물어보았다.",
-"After you read each student's story, you will get a better idea of the profound impact role models can have when it comes to shaping career goals.":"각 학생의 이야기를 읽고 나면, 직업 목표를 세우는 데 있어서 롤모델이 미칠 수 있는 엄청난 영향에 대해 더 잘 이해하게 될 것이다.",
-"Some teenagers have a clear vision of their career goals.":"어떤 10대들은 직업 목표에 대해 뚜렷한 비전이 있다.",
-"Others struggle to define them.":"다른 청소년들은 직업 목표를 정하는 것을 어려워한다.",
-"They help young people by providing them with guidance.":"그들은 청소년들에게 지도를 제공함으로써 도와준다.",
-"They provide the sense of purpose they need to succeed.":"그들은 성공하는 데 필요한 목적의식을 제공한다.",
-"We asked our readers about the qualities they admire most.":"우리는 독자들에게 그들이 가장 존경하는 자질에 대해 물어보았다.",
-"You will get a better idea of the profound impact role models can have.":"롤모델이 미칠 수 있는 엄청난 영향에 대해 더 잘 이해하게 될 것이다.",
-"Role models have a profound impact when it comes to shaping career goals.":"롤모델은 직업 목표를 세우는 데 있어서 엄청난 영향을 미친다.",
-"He dedicated his life to exploring and documenting the wonders of the underwater world.":"그는 수중 세계의 경이로움을 탐험하고 기록하는 데 그의 삶을 바쳤다.",
-"He became intrigued by the mysteries of the ocean, and he wanted to explore further.":"그는 해양의 신비로움에 호기심을 가지게 되었고, 더 깊이 탐험하고 싶어 했다.",
-"He became intrigued by the mysteries of the ocean.":"그는 해양의 신비로움에 호기심을 가지게 되었다.",
-"The diving equipment available at that time was insufficient.":"그 당시에 사용할 수 있었던 잠수 장비는 부적합했다.",
-"Instead of giving up, Cousteau decided to create his own equipment.":"Cousteau는 포기하는 대신 자신만의 장비를 만들기로 결심했다.",
-"After a long series of failed attempts, he finally succeeded in developing a portable breathing device, which he called the \"Aqua-Lung.\"":"오랜 실패 끝에 그는 마침내 휴대용 호흡 기계를 개발하는 데 성공했고, 이 장비를 'Aqua-Lung'이라고 불렀다.",
-"After a long series of failed attempts, he finally succeeded.":"오랜 실패 끝에 그는 마침내 성공했다.",
-"He finally succeeded in developing a portable breathing device.":"그는 마침내 휴대용 호흡 기계를 개발하는 데 성공했다.",
-"Cousteau shared his underwater experiences with the world in a compelling documentary film released in 1956.":"Cousteau는 1956년에 개봉한 흥미로운 다큐멘터리 영화로 그의 수중 세계 경험을 세상과 공유했다.",
-"He shared his experiences in a compelling documentary film.":"그는 흥미로운 다큐멘터리 영화로 그의 경험을 공유했다.",
-"It transformed people's perceptions of the ocean and promoted the need for marine conservation.":"이 영화는 바다에 대한 사람들의 인식을 바꾸었고, 해양 보존에 대한 필요성을 널리 알렸다.",
-"It transformed people's perceptions of the ocean.":"그것은 바다에 대한 사람들의 인식을 바꾸었다.",
-"It promoted the need for marine conservation.":"그것은 해양 보존에 대한 필요성을 널리 알렸다.",
-"Cousteau's curiosity drove him to constantly challenge himself in new areas, and his passion enabled him to make the impossible a reality.":"Cousteau의 호기심은 그를 새로운 분야에 끊임없이 도전하게 했고, 그의 열정은 불가능한 것을 현실로 만들게 했다.",
-"Cousteau's curiosity drove him to constantly challenge himself in new areas.":"Cousteau의 호기심은 그를 새로운 분야에 끊임없이 도전하게 했다.",
-"His passion enabled him to make the impossible a reality.":"그의 열정은 불가능한 것을 현실로 만들게 했다.",
-"Cousteau's life story inspired me to push the boundaries of what I can do.":"Cousteau의 인생 이야기는 내가 할 수 있는 것의 한계를 뛰어넘도록 격려했다.",
-"She was a notable zoologist who specialized in reptiles in the early 20th century.":"그녀는 20세기 초반에 파충류를 전문으로 다룬 저명한 동물학자였다.",
-"She was a notable zoologist who specialized in reptiles.":"그녀는 파충류를 전문으로 다룬 저명한 동물학자였다.",
-"She taught me that devotion to a particular field is important for shaping one's career.":"그녀는 내게 특정 분야에 전념하는 것은 한 사람의 경력을 형성하는 데 중요하다는 것을 가르쳐 주었다.",
-"She taught me that devotion to a particular field is important.":"그녀는 내게 특정 분야에 전념하는 것이 중요하다는 것을 가르쳐 주었다.",
-"During her childhood, Procter immersed herself in the exploration of nature and animals.":"Procter는 어린 시절에 자연과 동물을 탐험하는 것에 몰두했다.",
-"Procter immersed herself in the exploration of nature and animals.":"Procter는 자연과 동물을 탐험하는 것에 몰두했다.",
-"She was a brilliant student, but health problems prevented her from attending university.":"그녀는 뛰어난 학생이었지만, 건강 문제로 대학에 진학하지 못했다.",
-"She was a brilliant student.":"그녀는 뛰어난 학생이었다.",
-"Health problems prevented her from attending university.":"건강 문제로 그녀는 대학에 진학하지 못했다.",
-"Procter accumulated extensive knowledge of zoology.":"Procter는 동물학에 대한 광범위한 지식을 쌓았다.",
-"She began exchanging letters with George Boulenger, a prominent expert on reptiles.":"그녀는 유명한 파충류 전문가였던 George Boulenger와 편지를 주고받기 시작했다.",
-"He was so impressed that he hired her as his assistant at the British Museum.":"그는 그녀에게 아주 깊은 인상을 받아서 그녀를 British Museum에서 자신의 조수로 채용했다.",
-"He was so impressed that he hired her as his assistant.":"그는 아주 깊은 인상을 받아서 그녀를 조수로 채용했다.",
-"A few years later, she became the first female curator of reptiles at the London Zoo.":"몇 년 후, 그녀는 London Zoo의 첫 번째 여성 파충류 큐레이터가 되었다.",
-"She became the first female curator of reptiles at the London Zoo.":"그녀는 London Zoo의 첫 번째 여성 파충류 큐레이터가 되었다.",
-"There, she actively contributed to the design of the Reptile House by incorporating new technology that allowed for better care and breeding of wild animals.":"그곳에서 그녀는 야생 동물을 더 잘 돌보고 번식시킬 수 있게 하는 새로운 기술을 포함시킴으로써 Reptile House의 설계에 적극적으로 기여했다.",
-"She actively contributed to the design of the Reptile House.":"그녀는 Reptile House의 설계에 적극적으로 기여했다.",
-"She contributed to the design by incorporating new technology.":"그녀는 새로운 기술을 포함시킴으로써 설계에 기여했다.",
-"The technology allowed for better care and breeding of wild animals.":"그 기술은 야생 동물을 더 잘 돌보고 번식시킬 수 있게 했다.",
-"One of my passions might someday lead to a rewarding career.":"언젠가 내 열정 중 하나가 보람 있는 직업으로 이어질 것이다.",
-"From a young age, Kim was enthusiastic about drawing.":"그는 어렸을 때부터 그림 그리는 것에 열정적이었다.",
-"His dream of studying art in college was disrupted when he was diagnosed with color vision deficiency during high school.":"고등학교 때 색약 진단을 받으면서 대학에서 미술을 공부하고자 했던 그의 꿈에 지장이 갔다.",
-"His dream was disrupted when he was diagnosed with color vision deficiency.":"색약 진단을 받으면서 그의 꿈에 지장이 갔다.",
-"He was diagnosed with color vision deficiency during high school.":"그는 고등학교 때 색약 진단을 받았다.",
-"Surprisingly, he didn't allow this misfortune to discourage him.":"놀랍게도 그는 이 불행으로 좌절하지 않았다.",
-"He didn't allow this misfortune to discourage him.":"그는 이 불행으로 좌절하지 않았다.",
-"Instead, he simply viewed his condition as a minor issue that could happen to anyone.":"대신에, 그는 자신의 상태를 단지 누구에게나 일어날 수 있는 사소한 문제로 여겼다.",
-"He simply viewed his condition as a minor issue.":"그는 자신의 상태를 단지 사소한 문제로 여겼다.",
-"He sent his portfolio to all the animation studios in Korea.":"한국에 있는 모든 애니메이션 스튜디오에 자신의 포트폴리오를 보냈다.",
-"I give him a lot of credit for his persistence and his attitude toward the challenges in his life.":"나는 그의 끈기와 인생에서의 어려움을 대하는 태도를 높이 평가한다.",
-"I give him a lot of credit for his persistence.":"나는 그의 끈기를 높이 평가한다.",
-"If I encounter difficulties, I will simply find another way to pursue them, just as he did.":"만약 어려움을 맞닥뜨리게 된다면, 그가 그랬던 것처럼 그저 꿈을 추구하는 다른 방법을 찾을 것이다.",
-"If I encounter difficulties, I will find another way to pursue them.":"어려움을 맞닥뜨리게 된다면, 꿈을 추구하는 다른 방법을 찾을 것이다.",
-"These stories shared by our readers emphasize the importance of role models in guiding teenagers toward their career goals.":"독자들이 공유한 이야기들은 청소년들을 직업 목표로 인도하는 데 있어서 롤모델의 중요성을 강조한다.",
-"These stories emphasize the importance of role models.":"이 이야기들은 롤모델의 중요성을 강조한다.",
-"Role models, regardless of their field, inspire us because they possess qualities like persistence, commitment, and optimism.":"분야에 상관없이 롤모델은 끈기, 헌신, 낙관주의와 같은 자질을 가지고 있어서 우리에게 영감을 준다.",
-"Role models, regardless of their field, inspire us.":"분야에 상관없이 롤모델은 우리에게 영감을 준다.",
-"They possess qualities like persistence, commitment, and optimism.":"그들은 끈기, 헌신, 낙관주의와 같은 자질을 가지고 있다.",
-"Dr. Caitlin Yoon, a professor of neuroscience at Central University, is here with us today to talk about how we can become better thinkers.":"Central 대학의 신경 과학 교수 Caitlin Yoon 박사님께서 더 잘 생각하는 사람이 될 수 있는 방법에 대해 이야기하고자 오늘 이 자리에 오셨습니다.",
-"Dr. Caitlin Yoon, a professor of neuroscience at Central University.":"Central 대학의 신경 과학 교수 Caitlin Yoon 박사.",
-"Suppose you go into a store to purchase a notebook and a pen.":"여러분이 공책과 펜을 사기 위해 가게에 들어갔다고 가정해 봅시다.",
-"This simple question reveals the fundamental way that our brains work.":"이 간단한 문제는 우리의 뇌가 작동하는 근본적인 방법을 보여줍니다.",
-"They actually have two different systems that they can utilize: System 1 and System 2.":"실제로 뇌가 이용할 수 있는 두 가지 다른 시스템이 있는데, 그것은 System 1과 System 2입니다.",
-"They actually have two different systems that they can utilize.":"실제로 뇌가 이용할 수 있는 두 가지 다른 시스템이 있습니다.",
-"System 1 is based on instinct, and it works without our conscious control.":"System 1은 본능을 기반으로 하고, 의식적인 통제 없이 작동합니다.",
-"System 1 is based on instinct.":"System 1은 본능을 기반으로 합니다.",
-"It works without our conscious control.":"그것은 의식적인 통제 없이 작동합니다.",
-"Our brains naturally apply this system in countless everyday situations.":"우리의 뇌는 무수히 많은 일상적인 상황들에 자연스럽게 이 시스템을 적용합니다.",
-"Our brains apply this system in countless everyday situations.":"우리의 뇌는 무수히 많은 일상적인 상황들에 이 시스템을 적용합니다.",
-"This system works very quickly, because it needs to continuously process enormous amounts of information coming in through our senses.":"이 시스템은 매우 빠르게 작동하는데, 우리의 감각 기관을 통해 들어오는 엄청난 양의 정보를 계속해서 처리해야 하기 때문입니다.",
-"It needs to continuously process enormous amounts of information.":"그것은 엄청난 양의 정보를 계속해서 처리해야 합니다.",
-"System 2 is responsible for our reasoning and deeper decision-making processes.":"System 2는 추론과 더 깊은 의사 결정 과정을 책임집니다.",
-"Our brains use this system when we check the validity of an argument.":"우리가 어떠한 주장의 타당성을 확인할 때 우리의 뇌는 이 시스템을 사용합니다.",
-"It controls conscious mental activities when we need to focus or make careful choices.":"그것은 우리가 집중하거나 신중한 선택을 해야 할 때 의식적인 정신 활동을 통제합니다.",
-"However, while System 2 is more reliable, its application requires time and effort.":"그러나 System 2가 더 믿을 만하긴 하지만, 그것을 적용하는 데는 시간과 노력이 필요합니다.",
-"System 2 is more reliable.":"System 2가 더 믿을 만합니다.",
-"If you got the right answer after taking a few seconds to reflect.":"곰곰이 생각할 시간을 가진 후에 정답을 알아냈다면.",
-"Our brains tend to rely heavily on taking mental shortcuts with System 1.":"우리의 뇌는 System 1을 통해 정신적 지름길을 이용하는 것에 매우 의존하는 경향이 있습니다.",
-"Our brains tend to rely heavily on taking mental shortcuts.":"우리의 뇌는 정신적 지름길을 이용하는 것에 매우 의존하는 경향이 있습니다.",
-"Why do we rely on mental shortcuts when System 1 is not as dependable as System 2?":"System 1을 System 2만큼 믿을 수 없는데도 불구하고 왜 우리는 이러한 정신적 지름길에 의존하나요?",
-"It is quite reasonable and effective for the brain to be a bit lazy sometimes.":"뇌가 때때로 약간 게을러지는 것은 꽤 합리적이고 효과적입니다.",
-"Having a lazy brain allows us to save energy for critical tasks that require our focus and attention.":"게으른 뇌를 가지고 있는 것은 우리가 집중력과 주의력을 필요로 하는 중요한 일을 하기 위한 에너지를 아끼게 해줍니다.",
-"Having a lazy brain allows us to save energy for critical tasks.":"게으른 뇌를 가지고 있는 것은 중요한 일을 위한 에너지를 아끼게 해줍니다.",
-"If your brain becomes too reliant on System 1.":"여러분의 뇌가 System 1에 너무 의존하게 되면.",
-"When you confront a problem that requires intense concentration.":"고도의 집중력을 필요로 하는 문제를 직면했을 때.",
-"A problem that requires intense concentration.":"고도의 집중력을 필요로 하는 문제.",
-"System 2 is essential for exercising human intelligence, so the less you use it, the more likely you are to become a lazy thinker.":"System 2는 인간의 지성을 발휘하는 데 필수적이므로, 그것을 덜 사용할수록 게으르게 생각하는 사람이 될 가능성이 더 커집니다.",
-"System 2 is essential for exercising human intelligence.":"System 2는 인간의 지성을 발휘하는 데 필수적입니다.",
-"Those who have an overly lazy brain frequently make errors.":"지나치게 게으른 뇌를 가진 사람들은 자주 실수를 하고 잘못된 결정을 내립니다.",
-"We can make a deliberate effort to practice thinking deeply with System 2 more often.":"우리는 System 2를 사용해서 깊이 생각하는 연습을 더 자주 하도록 의도적인 노력을 할 수 있습니다.",
-"We can make a deliberate effort to practice thinking deeply.":"우리는 깊이 생각하는 연습을 하도록 의도적인 노력을 할 수 있습니다.",
-"Reconsider your initial thoughts instead of accepting them right away.":"여러분의 처음 생각을 곧바로 받아들이는 대신, 다시 생각해 보세요.",
-"Keep generating more ideas and carefully compare the available options.":"계속해서 더 많은 아이디어를 생각해 내고, 결정을 내리기 전 가능한 선택지들을 신중하게 비교하세요.",
-"Curiosity can motivate us to investigate unfamiliar topics and ideas.":"호기심은 우리가 잘 모르는 주제나 개념을 조사하도록 동기를 부여해줄 수 있습니다.",
-"Curiosity can motivate us to investigate unfamiliar topics.":"호기심은 우리가 잘 모르는 주제를 조사하도록 동기를 부여해줄 수 있습니다.",
-"It encourages us to dive deeper into a subject and explore it from multiple angles.":"그것은 우리가 주제에 대해 더 깊이 파고들고, 그것을 다양한 관점에서 탐구하도록 권장합니다.",
-"It encourages us to explore a subject from multiple angles.":"그것은 우리가 주제를 다양한 관점에서 탐구하도록 권장합니다.",
-"It can serve as a foundation for building deeper thinking habits.":"그것은 더 깊이 생각하는 습관을 만들기 위한 토대의 역할을 할 수 있습니다.",
-"Learn something new in order to stimulate your brain and become more intelligent.":"여러분의 뇌를 자극하고 더 똑똑해지기 위해서 새로운 무언가를 배워 보세요.",
-"Learn something new in order to stimulate your brain.":"뇌를 자극하기 위해서 새로운 무언가를 배워 보세요.",
-"New paths that allow information to flow through your brain more efficiently.":"여러분의 뇌에서 정보가 더 효율적으로 흐르게 해주는 새로운 길.",
-"We are creatures of habit, so it is vitally important that we develop well-balanced thinking habits.":"우리는 습관의 동물이므로, 균형이 잘 잡힌 사고 습관을 기르는 것은 지극히 중요합니다.",
-"We are creatures of habit.":"우리는 습관의 동물입니다.",
-"It is vitally important that we develop well-balanced thinking habits.":"균형이 잘 잡힌 사고 습관을 기르는 것은 지극히 중요합니다.",
-"We should remain alert so that we do not fall into the trap of making careless decisions.":"우리는 부주의한 결정을 내리는 함정에 빠지지 않도록 경계심을 유지해야 합니다.",
-"We should remain alert so that we do not fall into the trap.":"우리는 함정에 빠지지 않도록 경계심을 유지해야 합니다.",
-"We should invest time into learning how to think deeply in order to use both System 1 and System 2 harmoniously.":"우리는 System 1과 System 2를 모두 조화롭게 사용하기 위해서 깊이 사고하는 방법을 배우는 데 시간을 투자해야 합니다.",
-"We should use both System 1 and System 2 harmoniously.":"우리는 System 1과 System 2를 모두 조화롭게 사용해야 합니다.",
-"You can exercise your intelligence and reinforce your mental capabilities.":"여러분은 지성을 발휘하고 지적 능력을 강화할 수 있습니다.",
-"It is a care center that houses more than 160 elderly residents who require assistance.":"그것은 도움이 필요한 160명 이상의 노인 거주자들을 수용하고 있는 요양 시설이다.",
-"It is a care center that houses more than 160 elderly residents.":"그것은 160명 이상의 노인 거주자들을 수용하는 요양 시설이다.",
-"A care center that houses elderly residents who require assistance.":"도움이 필요한 노인 거주자들을 수용하는 요양 시설.",
-"This unique \"intergenerational living\" project began in 2012, after budget cuts reduced the amount of money care homes in the Netherlands received.":"이 독특한 '세대 간 생활' 프로젝트는 네덜란드의 요양원이 받았던 돈이 예산 삭감으로 줄어든 후였던 2012년에 시작되었다.",
-"This unique 'intergenerational living' project began in 2012.":"이 독특한 '세대 간 생활' 프로젝트는 2012년에 시작되었다.",
-"This project began after budget cuts reduced the amount of money care homes received.":"이 프로젝트는 예산 삭감으로 요양원이 받는 돈이 줄어든 후에 시작되었다.",
-"This funding reduction led to the loss of many essential elderly care programs, including social, educational, and counseling services.":"이 자금 삭감은 사회, 교육, 그리고 상담 서비스를 포함한 여러 가지 필수적인 노인 돌봄 프로그램의 손실로 이어졌다.",
-"This funding reduction led to the loss of many essential programs.":"이 자금 삭감은 많은 필수적인 프로그램의 손실로 이어졌다.",
-"The loss of social, educational, and counseling services.":"사회, 교육, 그리고 상담 서비스의 손실.",
-"Humanitas needed to seek an affordable solution to fill the gap left by the removal of these services.":"Humanitas는 이 서비스들이 사라지면서 남은 공백을 메우기 위해 적당한 해결책을 찾아야 했다.",
-"Humanitas needed to seek an affordable solution.":"Humanitas는 적당한 해결책을 찾아야 했다.",
-"The building had numerous empty rooms available, the director decided to offer local university students free accommodations in return for spending time with the elderly residents.":"그 건물에는 사용 가능한 빈방이 많았기 때문에, 시설장은 지역 대학생들에게 노인 거주자들과 함께 시간을 보내는 것의 대가로 무료 거처를 제공하기로 결정했다.",
-"The building had numerous empty rooms available.":"그 건물에는 사용 가능한 빈방이 많았다.",
-"The director decided to offer students free accommodations.":"시설장은 학생들에게 무료 거처를 제공하기로 결정했다.",
-"Many students were struggling to afford the area's high rents, so the proposal was a true win-win situation.":"많은 학생들이 그 지역의 높은 임대료를 감당하기 어려워하고 있었고, 그래서 그 제안은 진정으로 모두에게 유리한 상황이었다.",
-"The proposal was a true win-win situation.":"그 제안은 진정으로 모두에게 유리한 상황이었다.",
-"Let's hear more about this intriguing place.":"이 흥미진진한 공간에 대해 더 들어보자.",
-"As a live-in student, I'm required to spend at least 30 hours per month with my elderly neighbors in exchange for free accommodations.":"입주 학생으로서, 저는 무료 거처에 대한 대가로 한 달에 최소 30시간을 노인 이웃들과 함께 보내야 하죠.",
-"As a live-in student, I'm required to spend at least 30 hours per month.":"입주 학생으로서, 나는 한 달에 최소 30시간을 보내야 한다.",
-"I spend time with my elderly neighbors in exchange for free accommodations.":"나는 무료 거처의 대가로 노인 이웃들과 함께 시간을 보낸다.",
-"Students were offered free accommodations in return for spending time with the elderly.":"학생들은 노인들과 함께 시간을 보내는 것의 대가로 무료 거처를 제공받았다.",
-"Other times I just hang out with them.":"다른 때에는 그저 함께 시간을 보내요.",
-"They possess knowledge that I have yet to acquire.":"그분들은 제가 아직 얻지 못한 지식을 가지고 있어요.",
-"I've learned the value of having a casual chat over a cup of coffee from them.":"저는 그분들에게서 커피 한 잔과 함께 가볍게 이야기를 나누는 것의 가치를 배웠어요.",
-"It's a really great way to take a break from rushing around all the time.":"그건 항상 분주하게 돌아다니던 것에서 벗어나 잠시 휴식을 취할 수 있는 정말 좋은 방법이에요.",
-"It's a great way to take a break from rushing around all the time.":"그건 항상 분주하게 돌아다니던 것에서 벗어나 잠시 휴식을 취할 수 있는 정말 좋은 방법이에요.",
-"I used to feel sorry for the elderly because I focused only on the things they can't do.":"저는 어르신들이 할 수 없는 일들에만 초점을 맞추었기 때문에, 그분들에 대해 안타까움을 느끼곤 했어요.",
-"I used to feel sorry for the elderly.":"저는 어르신들에 대해 안타까움을 느끼곤 했어요.",
-"I've made deep, meaningful friendships that I'll never forget here.":"여기서 절대로 잊지 못할 깊고 의미 있는 우정을 쌓았죠.",
-"I've made deep, meaningful friendships here.":"여기서 깊고 의미 있는 우정을 쌓았죠.",
-"Living here has changed my life in ways I never thought possible, and I'm really grateful for this transformative experience.":"여기서 사는 것은 제가 가능하다고 생각하지 못했던 방식으로 제 삶을 변화시켰고, 이러한 변화의 경험에 정말 감사함을 느껴요.",
-"I'm grateful for this transformative experience.":"이러한 변화의 경험에 정말 감사함을 느껴요.",
-"The students here are energetic, friendly, and caring.":"이곳의 학생들은 활기차고, 친절하고, 배려심이 많아요.",
-"Humanitas was already a decent place to live before the students arrived, but it has become a lot more fun since they moved in.":"Humanitas는 학생들이 오기 전에도 이미 살기 괜찮은 곳이었지만, 그들이 입주하고 나서 훨씬 더 즐거워졌어요.",
-"Humanitas was already a decent place to live.":"Humanitas는 이미 살기 괜찮은 곳이었어요.",
-"She went through a difficult time of grief after she lost her father, so I did what came naturally.":"그녀는 작년에 아버지를 여의고 나서 힘든 슬픔의 시간을 겪었고, 저는 자연스럽게 하게 되는 일을 했어요.",
-"She went through a difficult time of grief after she lost her father.":"그녀는 아버지를 여의고 나서 힘든 슬픔의 시간을 겪었어요.",
-"She went through a difficult time of grief.":"그녀는 힘든 슬픔의 시간을 겪었어요.",
-"I did what came naturally.":"저는 자연스럽게 하게 되는 일을 했어요.",
-"She later told me that I was a great comfort during that difficult time, which made me feel very good.":"나중에 그녀는 그 힘든 시기에 제가 큰 위로가 되었다고 말해주었는데, 그 사실이 저를 매우 기분 좋게 해주었어요.",
-"She told me that I was a great comfort during that difficult time.":"그녀는 그 힘든 시기에 내가 큰 위로가 되었다고 말해주었어요.",
-"It always feels nice to be reminded that I'm still capable of doing things for others.":"제가 아직 다른 사람을 위해 무언가 할 수 있다는 것이 생각날 땐 항상 기분이 좋아요.",
-"It feels nice to be reminded that I'm still capable of doing things for others.":"제가 아직 다른 사람을 위해 무언가 할 수 있다는 것이 생각날 땐 기분이 좋아요.",
-"Having young, vibrant people around helps me forget about the pain and enjoy my life!":"하지만 젊고 활기찬 사람들을 곁에 두는 것은 이 통증을 잊고 제 삶을 즐길 수 있게 도와준답니다!",
-"Having young, vibrant people around helps me forget about the pain.":"젊고 활기찬 사람들을 곁에 두는 것은 통증을 잊게 해줘요.",
-"The older residents gain a more youthful perspective on life, while the younger residents receive valuable life lessons.":"학생 거주자들은 소중한 인생 교훈을 얻는 반면, 노인 거주자들은 삶에 대한 더 젊은 관점을 얻는다.",
-"The older residents gain a more youthful perspective on life.":"노인 거주자들은 삶에 대한 더 젊은 관점을 얻는다.",
-"More and more care homes around Europe are now trying intergenerational living, bringing the young and old together in harmony.":"유럽 전역의 점점 더 많은 요양원들이 젊은 사람들과 노인들을 조화롭게 결속시키면서 세대 간 생활을 시도하고 있다.",
-"Bringing the young and old together in harmony.":"젊은 사람들과 노인들을 조화롭게 결속시키면서.",
-"Some artists spark their creativity by looking closely at ordinary objects.":"일부 예술가들은 평범한 사물을 자세히 관찰함으로써 창의력을 발휘한다.",
-"They try to discover the beauty hidden within these common objects and then turn them into works of art.":"그들은 이러한 평범한 사물 속에 숨겨진 아름다움을 발견하고 예술 작품으로 승화시키려고 노력한다.",
-"We are turning the ordinary into something extraordinary.":"우리는 평범한 것을 비상한 것으로 바꾸고 있다.",
-"The one on the right is very unconventional.":"오른쪽에 있는 그림은 매우 색다르다.",
-"The painting shows striking creativity and originality.":"이 그림은 눈에 띄는 창의력과 독창성을 보여준다.",
-"Fruits, flowers, and vegetables are arranged like the pieces of a puzzle to create a human head.":"과일, 꽃, 그리고 채소가 사람의 머리를 만들기 위해 퍼즐 조각처럼 배열되어 있다.",
-"Fruits, flowers, and vegetables are arranged like the pieces of a puzzle.":"과일, 꽃, 그리고 채소가 퍼즐 조각처럼 배열되어 있다.",
-"This painting is representative of the artist's signature style of \"composite portraits.\"":"이 그림은 작가의 특징적인 스타일인 '합성 초상화'를 대표하는 작품이다.",
-"This painting is representative of the artist's signature style.":"이 그림은 작가의 특징적인 스타일을 대표하는 작품이다.",
-"They both depict the same person, Holy Roman Emperor Rudolf II.":"이 두 작품은 모두 같은 인물인 신성 로마 제국의 황제 루돌프 2세를 묘사한다.",
-"Another example can be found in one of his 'reversible' paintings.":"또 다른 예는 그의 '뒤집을 수 있는' 그림 중 하나에서 찾을 수 있다.",
-"When viewed normally, it is just an ordinary still life of vegetables in a bowl.":"정상적으로 보면 그것은 그릇에 담긴 채소를 그린 평범한 정물화일 뿐이다.",
-"However, when flipped upside down, it is magically transformed into a smiling face!":"하지만 거꾸로 뒤집으면 마법처럼 웃는 얼굴로 변한다!",
-"However, when flipped upside down, it is magically transformed into a smiling face.":"하지만 거꾸로 뒤집으면 마법처럼 웃는 얼굴로 변한다.",
-"He turned them upside down and made some adjustments to create faces.":"그것들을 거꾸로 뒤집고 얼굴을 만들기 위해 약간의 수정을 했다.",
-"He wanted to add an interactive element to his work by doing so.":"그렇게 함으로써 자신의 작품에 상호작용적 요소를 더하고 싶었기 때문일 것이다.",
-"His innovative approach to art inspired many great artists who came after him.":"예술에 대한 그의 혁신적인 접근법은 그의 뒤를 이은 많은 위대한 예술가들에게 영감을 주었다.",
-"His innovative approach to art inspired many great artists.":"예술에 대한 그의 혁신적인 접근법은 많은 위대한 예술가들에게 영감을 주었다.",
-"Using everyday items, she creates playful visual illusions that force you to look twice in order to confirm what you have just seen.":"그녀는 일상적인 물건을 사용하여 당신이 방금 본 것을 확인하기 위해 두 번 보게 하는 재미난 착시를 만들어 낸다.",
-"She creates playful visual illusions.":"그녀는 재미난 착시를 만들어 낸다.",
-"Her unique style has been called 'household surrealism'.":"그녀의 독특한 스타일은 '집 안의 초현실주의'라고 불려왔다.",
-"She got inspiration for the series while she was hanging her laundry.":"그녀는 빨래를 널다가 이 시리즈에 대한 영감을 얻었다.",
-"Stentzel says she came up with the concept of Crunchie while putting together a salad for her family.":"Stentzel은 가족을 위해 샐러드를 만들다가 Crunchie의 발상을 떠올렸다고 말한다.",
-"Stentzel says she came up with the concept while putting together a salad.":"Stentzel은 샐러드를 만들다가 그 발상을 떠올렸다고 말한다.",
-"Stentzel says that it is her active observation skills that allow her to make magic out of the ordinary.":"Stentzel은 평범함 속에서 마법을 만들게 하는 것은 바로 그녀의 적극적인 관찰 기술이라고 말한다.",
-"This keen observation is what enables her to continuously produce creative and imaginative works of art.":"이러한 예리한 관찰력이 그녀가 창의적이고 상상력이 풍부한 예술 작품을 계속해서 만들어낼 수 있게 하는 것이다.",
-"This keen observation enables her to continuously produce creative works of art.":"이러한 예리한 관찰력이 그녀가 창의적인 예술 작품을 계속해서 만들어낼 수 있게 한다.",
-"This keen observation is what enables her to produce creative works of art.":"이러한 예리한 관찰력이 바로 그녀가 창의적인 예술 작품을 만들게 하는 것이다.",
-"Creativity is not some kind of exceptional skill that belongs to exclusive groups of people.":"창의력은 한정된 집단에만 있는 특출난 기술이 아니다.",
-"Creativity is not some kind of exceptional skill.":"창의력은 특출난 기술이 아니다.",
-"We are constantly using our creativity to adapt, adjust, and rearrange the things around us.":"우리는 우리 주변의 것들을 조정하고, 맞추고, 재배열하기 위해 끊임없이 창의력을 발휘하고 있다.",
-"We are constantly using our creativity to adapt and rearrange things.":"우리는 주변의 것들을 조정하고 재배열하기 위해 끊임없이 창의력을 발휘하고 있다.",
-"We are using our creativity to adapt, adjust, and rearrange the things around us.":"우리는 주변의 것들을 조정하고, 맞추고, 재배열하기 위해 창의력을 발휘하고 있다.",
-"Look carefully, and you might discover something that sparks your own imagination and creativity.":"주의 깊게 살펴보면 당신만의 상상력과 창의력을 자극하는 무언가를 발견할지도 모른다.",
-"Don't just give them a quick glance.":"그저 힐끗 보기만 하지 말아라.",
-"Her life centered around swimming.":"그녀의 삶은 수영을 중심으로 돌아갔다.",
-"She got the chance to represent Syria in an international swimming championship, and it seemed like her Olympic dream might someday come true.":"그녀는 국제 수영 선수권 대회에서 시리아를 대표할 기회를 얻었고, 올림픽에 대한 그녀의 꿈이 언젠가 실현될 것처럼 보였다.",
-"She got the chance to represent Syria in an international swimming championship.":"그녀는 국제 수영 선수권 대회에서 시리아를 대표할 기회를 얻었다.",
-"Her life would soon be turned upside down by the horrors of the Syrian civil war, which had broken out in 2011.":"시리아 내전의 공포로 인해 그녀의 삶이 곧 뒤집어질 것이라고 전혀 생각하지 못했는데, 그것은 2011년에 발발했다.",
-"Her life would soon be turned upside down by the horrors of the Syrian civil war.":"시리아 내전의 공포로 인해 그녀의 삶이 곧 뒤집어질 것이었다.",
-"The Syrian civil war had broken out in 2011.":"시리아 내전은 2011년에 발발했다.",
-"Normal activities like going to school became risky.":"학교에 가는 것과 같은 평범한 활동이 위험해졌다.",
-"Through all of this chaos, she clung to her dream and kept swimming.":"이 모든 혼란 속에서도 그녀는 자신의 꿈에 매달렸고, 계속 수영을 했다.",
-"Through all of this chaos, she clung to her dream.":"이 모든 혼란 속에서도 그녀는 자신의 꿈에 매달렸다.",
-"One fateful day, a bomb fell in the pool where she was training.":"어느 운명적인 날, 그녀가 훈련하고 있던 수영장에 폭탄이 떨어졌다.",
-"This incident was horrifying enough to be a wake-up call for Yusra and her sister Sara.":"이 사건은 Yusra와 그녀의 언니 Sara의 정신을 차리게 하는 신호가 될 만큼 충분히 무서운 일이었다.",
-"This incident was horrifying enough to be a wake-up call.":"이 사건은 경각심을 불러일으키는 신호가 될 만큼 충분히 무서운 일이었다.",
-"They made up their minds to flee Syria and go to Germany to avoid the war.":"전쟁을 피해 시리아에서 달아나 독일로 가기로 결심했다.",
-"They made up their minds to flee Syria and go to Germany.":"그들은 시리아에서 달아나 독일로 가기로 결심했다.",
-"They made up their minds to flee Syria.":"그들은 시리아에서 달아나기로 결심했다.",
-"She wanted to pursue her dream and live without fear.":"Yusra는 자신의 꿈을 추구하고 두려움 없이 살고 싶다면 그것이 유일한 선택지라는 것을 알고 있었다.",
-"They boarded a tiny boat designed for seven passengers.":"그들은 7명의 승객이 탑승할 수 있도록 만들어진 작은 보트에 탔다.",
-"They were heading across the sea when disaster struck.":"재앙이 닥쳤을 때, 그들은 바다를 건너는 중이었다.",
-"The heavy boat began to sink, and the panicked, desperate passengers had no choice but to throw their possessions into the sea.":"무거운 보트는 가라앉기 시작했고, 겁에 질린 필사적인 승객들은 자신의 소지품을 바다로 던질 수밖에 없었다.",
-"The heavy boat began to sink.":"무거운 보트는 가라앉기 시작했다.",
-"The panicked, desperate passengers had no choice but to throw their possessions into the sea.":"겁에 질린 필사적인 승객들은 자신의 소지품을 바다로 던질 수밖에 없었다.",
-"The panicked, desperate passengers had no choice.":"겁에 질린 필사적인 승객들은 선택의 여지가 없었다.",
-"Passengers had no choice but to throw their possessions into the sea.":"승객들은 자신의 소지품을 바다로 던질 수밖에 없었다.",
-"She watched people's treasured belongings disappear under the waves.":"Yusra는 사람들의 소중한 소지품들이 물결 아래로 사라지는 것을 보며 비통함을 느꼈다.",
-"The four of them guided the drifting boat.":"넷은 표류하는 보트를 이끌었다.",
-"No matter how exhausted they were, they kept moving.":"아무리 지쳐도 그들은 계속 움직였다.",
-"At the end of this overwhelming 25-day journey, they finally made it to Germany and settled at a refugee center in Berlin.":"25일간의 엄청난 여정 끝에, 그들은 마침내 독일에 도착하여 베를린의 한 난민 센터에 정착했다.",
-"At the end of this overwhelming 25-day journey, they finally made it to Germany.":"25일간의 엄청난 여정 끝에, 그들은 마침내 독일에 도착했다.",
-"They finally made it to Germany and settled at a refugee center.":"그들은 마침내 독일에 도착하여 난민 센터에 정착했다.",
-"They finally made it to Germany.":"그들은 마침내 독일에 도착했다.",
-"Despite all the hardships and adversities she underwent, Yusra's passion for swimming never left her.":"그녀가 겪은 모든 어려움과 역경에도 불구하고, Yusra의 수영에 대한 열정은 그녀를 떠나지 않았다.",
-"Despite all the hardships and adversities she underwent.":"그녀가 겪은 모든 어려움과 역경에도 불구하고.",
-"It was the only thing she could do to feel at home in this foreign land.":"사실, 그것은 그녀가 이국땅에서 편안함을 느끼기 위해 할 수 있는 유일한 일이었다.",
-"She decided to take up training again, and she started looking for a coach in Berlin who could help her reach her full potential.":"그녀는 다시 훈련을 시작하기로 결심했고, 베를린에서 자신의 최대 잠재력에 도달할 수 있도록 도와줄 코치를 찾기 시작했다.",
-"She decided to take up training again.":"그녀는 다시 훈련을 시작하기로 결심했다.",
-"She was looking for a coach who could help her reach her full potential.":"그녀는 최대 잠재력에 도달할 수 있도록 도와줄 코치를 찾고 있었다.",
-"When he saw her swim, he immediately recognized her outstanding talent and agreed to do so.":"그녀가 수영하는 모습을 봤을 때, 그는 즉시 그녀의 뛰어난 재능을 알아봤고 그렇게 하기로 승낙했다.",
-"He immediately recognized her outstanding talent.":"그는 즉시 그녀의 뛰어난 재능을 알아봤다.",
-"Sven helped Yusra stay focused and persistent in her efforts to pursue excellence.":"Sven은 Yusra가 탁월함을 추구하고자 하는 그녀의 노력에 집중하고 끈질기게 노력할 수 있도록 도왔다.",
-"Sven helped Yusra stay focused and persistent.":"Sven은 Yusra가 집중하고 끈질기게 노력할 수 있도록 도왔다.",
-"Yusra trained hard day and night, hoping her efforts would pay off one day.":"Yusra는 자신의 노력이 언젠가 성과를 내길 바라며 그의 가르침에 따라 밤낮으로 열심히 훈련했다.",
-"Yusra trained hard, hoping her efforts would pay off one day.":"Yusra는 자신의 노력이 언젠가 성과를 내길 바라며 열심히 훈련했다.",
-"Although it seemed like a great opportunity, Yusra was hesitant.":"그것은 좋은 기회처럼 보였지만, Yusra는 망설였다.",
-"People might view her with pity instead of seeing her as a serious athlete.":"사람들이 그녀를 진지한 운동선수로 보는 대신 연민을 가지고 바라볼 수도 있다고 생각했다.",
-"She almost turned down the invitation, but she decided to accept it after she realized that she could inspire hope in millions of other refugees facing similar challenges.":"그녀는 초대를 거절할 뻔했지만, 비슷한 어려움에 처한 수백만 명의 다른 난민들에게 희망을 심어줄 수 있다는 사실을 깨달은 후에 그것을 수락하기로 결정했다.",
-"She almost turned down the invitation.":"그녀는 초대를 거절할 뻔했다.",
-"She realized that she could inspire hope in millions of other refugees.":"그녀는 수백만 명의 다른 난민들에게 희망을 심어줄 수 있다는 사실을 깨달았다.",
-"She could inspire hope in millions of other refugees.":"그녀는 수백만 명의 다른 난민들에게 희망을 심어줄 수 있었다.",
-"She was determined to pour everything she had into the competition.":"그녀는 가지고 있는 모든 것을 경기에 쏟아붓기로 굳게 결심했다.",
-"She was proud to have made history alongside her teammates.":"그녀는 팀 동료들과 함께 새로운 역사를 만들었다는 것에 자부심을 느꼈다.",
-"She remarked, 'I want everyone to stay strong for their goals in life.'":"그녀는 말했다. '저는 모두가 자기 인생의 목표를 위하여 굳세게 버텨내길 바랍니다.'",
-"She remarked, 'I want everyone to stay strong for their goals in life, because if you have your goals in front of your eyes, you will do everything you can.'":"그녀는 말했다. '저는 모두가 자기 인생의 목표를 위하여 굳세게 버텨내길 바랍니다. 왜냐하면 여러분의 눈앞에 목표가 있으면, 여러분이 할 수 있는 모든 것을 할 것이기 때문입니다.'",
-"He wanted to add an interactive element to his work.":"그는 자신의 작품에 상호작용적 요소를 더하고 싶었기 때문일 것이다.",
-"I've learned the value of having a casual chat over a cup of coffee.":"저는 그분들에게서 커피 한 잔과 함께 가볍게 이야기를 나누는 것의 가치를 배웠어요.",
-"This witty and amusing creation is actually a work of art.":"이 재치 있고 재미있는 창작물은 사실 시각 예술가 Helga Stentzel이 만든 예술 작품이다.",
-"However, the diving equipment available at that time was insufficient.":"하지만 그 당시에 사용할 수 있었던 잠수 장비는 부적합했다.",
-"You may not have heard of her, but she was a notable zoologist who specialized in reptiles in the early 20th century.":"그녀에 대해 들어보지 못했을지도 모르지만, 그녀는 20세기 초반에 파충류를 전문으로 다룬 저명한 동물학자였다.",
-"She began exchanging letters with George Boulenger, a prominent expert on reptiles, in order to share ideas.":"그녀는 의견을 나누기 위해 유명한 파충류 전문가였던 George Boulenger와 편지를 주고받기 시작했다.",
-"If I am fortunate, one of my passions might someday lead to a rewarding career.":"운이 좋다면 언젠가 내 열정 중 하나가 보람 있는 직업으로 이어질 것이다.",
-"However, his dream of studying art in college was disrupted when he was diagnosed with color vision deficiency during high school.":"하지만 고등학교 때 색약 진단을 받으면서 대학에서 미술을 공부하고자 했던 그의 꿈에 지장이 갔다.",
-"He found out that some animators work only in pencil, so he sent his portfolio to all the animation studios in Korea.":"그는 몇몇 애니메이터들이 오직 연필만으로 작업한다는 것을 알아냈고, 한국에 있는 모든 애니메이션 스튜디오에 자신의 포트폴리오를 보냈다.",
-"If you got the right answer to the notebook and pen question after taking a few seconds to reflect, then your brain used System 2 to check System 1's initial response.":"여러분이 곰곰이 생각할 시간을 가진 후에 공책과 펜 문제의 정답을 알아냈다면, 여러분의 뇌는 System 1의 첫 응답을 검토하기 위해 System 2를 사용한 것입니다.",
-"However, our brains tend to rely heavily on taking mental shortcuts with System 1.":"하지만 우리의 뇌는 System 1을 통해 정신적 지름길을 이용하는 것에 매우 의존하는 경향이 있습니다.",
-"So, Doctor, why do we rely on these mental shortcuts when System 1 is not as dependable as System 2?":"박사님, 그럼 System 1을 System 2만큼 믿을 수 없는데도 불구하고 왜 우리는 이러한 정신적 지름길에 의존하나요?",
-"So it's quite reasonable and effective for the brain to be a bit lazy sometimes.":"그래서 뇌가 때때로 약간 게을러지는 것은 꽤 합리적이고 효과적입니다.",
-"If your brain becomes too reliant on System 1, it will not be able to apply System 2 when you confront a problem that requires intense concentration.":"여러분의 뇌가 System 1에 너무 의존하게 되면, 고도의 집중력을 필요로 하는 문제를 직면했을 때 System 2를 적용할 수 없을 것입니다.",
-"Those who have an overly lazy brain frequently make errors and bad decisions.":"지나치게 게으른 뇌를 가진 사람들은 자주 실수를 하고 잘못된 결정을 내립니다.",
-"Keep generating more ideas and carefully compare the available options before making a decision.":"계속해서 더 많은 아이디어를 생각해 내고, 결정을 내리기 전 가능한 선택지들을 신중하게 비교하세요.",
-"Therefore, it can serve as a foundation for building deeper thinking habits.":"그러므로 그것은 더 깊이 생각하는 습관을 만들기 위한 토대의 역할을 할 수 있습니다.",
-"Finally, learn something new in order to stimulate your brain and become more intelligent.":"마지막으로, 여러분의 뇌를 자극하고 더 똑똑해지기 위해서 새로운 무언가를 배워 보세요.",
-"These new activities will create new paths that allow information to flow through your brain more efficiently.":"이 새로운 활동들은 여러분의 뇌에서 정보가 더 효율적으로 흐르게 해주는 새로운 길을 만들 겁니다.",
-"That way, instead of developing a habit of relying too much on a lazy brain, you can exercise your intelligence and reinforce your mental capabilities.":"그렇게 하면 게으른 뇌에 과도하게 의존하는 습관을 기르는 대신, 여러분은 지성을 발휘하고 지적 능력을 강화할 수 있습니다.",
-"Since the building had numerous empty rooms available, the director decided to offer local university students free accommodations in return for spending time with the elderly residents.":"그 건물에는 사용 가능한 빈방이 많았기 때문에, 시설장은 지역 대학생들에게 노인 거주자들과 함께 시간을 보내는 것의 대가로 무료 거처를 제공하기로 결정했다.",
-"Now, let's hear more about this intriguing place from two of the residents.":"이제 두 명의 주민으로부터 이 흥미진진한 공간에 대해 더 들어보자.",
-"Sometimes I teach them things, such as how to use social media, and other times I just hang out with them.":"전 때로는 그분들에게 소셜 미디어를 사용하는 법과 같은 것들을 가르쳐주고, 다른 때에는 그저 함께 시간을 보내요.",
-"With so much experience gathered over a lifetime, they possess knowledge that I have yet to acquire.":"평생 동안 쌓은 많은 경험과 함께, 그분들은 제가 아직 얻지 못한 지식을 가지고 있어요.",
-"For example, I've learned the value of having a casual chat over a cup of coffee from them.":"예를 들어, 저는 그분들에게서 커피 한 잔과 함께 가볍게 이야기를 나누는 것의 가치를 배웠어요.",
-"Last year, she went through a difficult time of grief after she lost her father, so I did what came naturally.":"그녀는 작년에 아버지를 여의고 나서 힘든 슬픔의 시간을 겪었고, 저는 자연스럽게 하게 되는 일을 했어요.",
-"But having young, vibrant people around helps me forget about the pain and enjoy my life!":"하지만 젊고 활기찬 사람들을 곁에 두는 것은 이 통증을 잊고 제 삶을 즐길 수 있게 도와준답니다!",
-"By doing so, we are turning the ordinary into something extraordinary — something that has never been seen before.":"그렇게 함으로써 우리는 평범한 것을 비상한 것, 즉 이전에는 볼 수 없었던 무언가로 바꾸고 있다.",
-"Some artists, for example, spark their creativity by looking closely at ordinary objects.":"예를 들어, 일부 예술가들은 평범한 사물을 자세히 관찰함으로써 창의력을 발휘한다.",
-"However, the one on the right, called Vertumnus, is very unconventional.":"그렇지만 오른쪽에 있는 Vertumnus라는 그림은 매우 색다르다.",
-"Their research showed that he first painted them as still life paintings and then turned them upside down and made some adjustments to create faces.":"그들의 연구는 그가 먼저 정물화로 그 그림들을 그렸고, 그러고 나서 그것들을 거꾸로 뒤집고 얼굴을 만들기 위해 약간의 수정을 했다는 것을 보여주었다.",
-"It was probably because he wanted to add an interactive element to his work by doing so.":"아마도 그렇게 함으로써 자신의 작품에 상호작용적 요소를 더하고 싶었기 때문일 것이다.",
-"His innovative approach to art inspired many great artists who came after him, including Pablo Picasso, Salvador Dalí, and René Magritte.":"예술에 대한 그의 혁신적인 접근법은 Pablo Picasso, Salvador Dalí, René Magritte를 포함하여 그의 뒤를 이은 많은 위대한 예술가들에게 영감을 주었다.",
-"This witty and amusing creation is actually a work of art created by the visual artist Helga Stentzel.":"이 재치 있고 재미있는 창작물은 사실 시각 예술가 Helga Stentzel이 만든 예술 작품이다.",
-"Whether we realize it or not, we are constantly using our creativity to adapt, adjust, and rearrange the things around us.":"인식하든 인식하지 못하든, 우리는 우리 주변의 것들을 조정하고, 맞추고, 재배열하기 위해 끊임없이 창의력을 발휘하고 있다.",
-"Take a look at the things around you, but don't just give them a quick glance.":"당신 주변의 사물들을 둘러보되, 그저 힐끗 보기만 하지 말아라.",
-"However, Yusra had no idea that her life would soon be turned upside down by the horrors of the Syrian civil war, which had broken out in 2011.":"하지만, Yusra는 시리아 내전의 공포로 인해 그녀의 삶이 곧 뒤집어질 것이라고 전혀 생각하지 못했는데, 그것은 2011년에 발발했다.",
-"Over the next few years, normal activities like going to school became risky.":"이후 몇 년간, 학교에 가는 것과 같은 평범한 활동이 위험해졌다.",
-"Although it did not explode, this incident was horrifying enough to be a wake-up call for Yusra and her sister Sara.":"비록 그것이 폭발하지는 않았지만, 이 사건은 Yusra와 그녀의 언니 Sara의 정신을 차리게 하는 신호가 될 만큼 충분히 무서운 일이었다.",
-"They realized that they could no longer stay in their home country, and they made up their minds to flee Syria and go to Germany to avoid the war.":"그들은 더 이상 조국에 머물 수 없다는 것을 깨달았고, 전쟁을 피해 시리아에서 달아나 독일로 가기로 결심했다.",
-"Yusra knew that it was her only option if she wanted to pursue her dream and live without fear.":"Yusra는 자신의 꿈을 추구하고 두려움 없이 살고 싶다면 그것이 유일한 선택지라는 것을 알고 있었다.",
-"There, along with 18 other people, including children and babies, they boarded a tiny boat designed for seven passengers.":"그곳에서 그들은 어린이들과 아기들을 포함한 18명의 다른 사람들과 함께 7명의 승객이 탑승할 수 있도록 만들어진 작은 보트에 탔다.",
-"They were heading across the sea towards Greece when disaster struck.":"재앙이 닥쳤을 때, 그들은 그리스를 향해 바다를 건너는 중이었다.",
-"Yusra felt heartbroken as she watched people's treasured belongings disappear under the waves.":"Yusra는 사람들의 소중한 소지품들이 물결 아래로 사라지는 것을 보며 비통함을 느꼈다.",
-"She jumped into the water along with Sara and two others, and the four of them guided the drifting boat.":"그녀는 Sara와 다른 두 명과 함께 물속으로 뛰어들었고, 넷은 표류하는 보트를 이끌었다.",
-"In fact, it was the only thing she could do to feel at home in this foreign land.":"사실, 그것은 그녀가 이국땅에서 편안함을 느끼기 위해 할 수 있는 유일한 일이었다.",
-"Following his instructions, Yusra trained hard day and night, hoping her efforts would pay off one day.":"Yusra는 자신의 노력이 언젠가 성과를 내길 바라며 그의 가르침에 따라 밤낮으로 열심히 훈련했다.",
-"If she joined the refugee team, she thought, people might view her with pity instead of seeing her as a serious athlete.":"그녀가 난민 올림픽 선수단에 합류하면, 사람들이 그녀를 진지한 운동선수로 보는 대신 연민을 가지고 바라볼 수도 있다고 생각했다.",
-"When she stepped onto the starting blocks, she was determined to pour everything she had into the competition.":"출발대에 섰을 때, 그녀는 가지고 있는 모든 것을 경기에 쏟아붓기로 굳게 결심했다.",
-"Even though she left the Olympics without a medal, she was proud to have made history alongside her teammates.":"비록 메달을 따지 못한 채로 올림픽을 떠났지만, 그녀는 팀 동료들과 함께 새로운 역사를 만들었다는 것에 자부심을 느꼈다."
-};
-function tagToken(token){
-  var t=token.toLowerCase().replace(/[.,!?;:'"()]/g,'');
-  if(/^[.,!?;:'"()\-]+$/.test(token)) return 'other';
-  if(/^(a|an|the|this|that|these|those|it|its|they|their|we|our|you|your|he|his|she|her|i|my)$/.test(t)) return 'other';
-  if(/^(in|on|at|to|for|of|from|with|by|as|into|onto|upon|about|over|under|through|between|among|across|along|around|behind|before|after|during|within|without|against|toward|towards|per|via|near|since|until|up|down|off|out|past)$/.test(t)) return 'other';
-  if(/^(and|or|but|so|yet|nor|although|because|since|while|if|when|where|that|which|who|whom|whose|what|how|whether|than|as|both|either|neither|not|also|however|therefore|thus|moreover|meanwhile)$/.test(t)) return 'other';
-  if(/^(is|are|was|were|be|been|being|have|has|had|do|does|did|will|would|shall|should|may|might|must|can|could)$/.test(t)) return 'verb';
-  if(/(?:ing|ed|ize|ise|ify|en|ate)$/.test(t)&&t.length>4) return 'verb';
-  if(/(?:ly|ful|less|ous|ive|al|ical|able|ible|ent|ant|ish)$/.test(t)) return 'adj';
-  if(/(?:tion|sion|ment|ness|ity|ance|ence|ship|hood|dom|ism|ist|er|or|ure|age)$/.test(t)&&t.length>4) return 'noun';
-  if(/^[A-Z]/.test(token)&&token!==token.toUpperCase()) return 'noun';
-  return 'noun';
+function toggle(btn){
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
 }
-var CHUNK_PALETTE=[
-  {bg:'#DBEAFE',border:'#3B82F6',color:'#1E3A8A'},
-  {bg:'#DCFCE7',border:'#22C55E',color:'#14532D'},
-  {bg:'#FEF3C7',border:'#F59E0B',color:'#78350F'},
-  {bg:'#FCE7F3',border:'#EC4899',color:'#831843'},
-  {bg:'#EDE9FE',border:'#8B5CF6',color:'#3B0764'},
-  {bg:'#FFEDD5',border:'#F97316',color:'#7C2D12'},
-  {bg:'#CFFAFE',border:'#06B6D4',color:'#164E63'},
-  {bg:'#F0FDF4',border:'#4ADE80',color:'#166534'}
-];
-function chunkSentence(sentence){
-  var words=sentence.split(' ');
-  var chunks=[];
-  var i=0;
-  while(i<words.length){
-    var w=words[i];
-    var wl=w.toLowerCase().replace(/[.,!?;:'"()]/g,'');
-    if(/^(a|an|the|this|that|these|those|my|your|his|her|its|our|their|no|every|each|any|some)$/.test(wl)){
-      var chunk=[w];
-      if(i+1<words.length) chunk.push(words[i+1]);
-      if(i+2<words.length){var nx=words[i+2].toLowerCase().replace(/[.,!?;:'"()]/g,'');
-        if(!/^(is|are|was|were|be|have|has|had|will|would|can|could|should|may|might|must|to|that|which|who|in|on|at|of|by|from|with|for|and|or|but|,|.)$/.test(nx)){chunk.push(words[i+2]);i+=3;}else{i+=2;}}else{i+=2;}
-      chunks.push(chunk.join(' '));
-    } else if(/^(in|on|at|to|for|of|from|with|by|into|onto|about|over|under|through|between|among|across|along|around|behind|before|after|during|without|against|toward|towards|near|since|until)$/.test(wl)){
-      var chunk2=[w];
-      if(i+1<words.length) chunk2.push(words[i+1]);
-      if(i+2<words.length){var nx2=words[i+2].toLowerCase().replace(/[.,!?;:'"()]/g,'');
-        if(!/^(in|on|at|to|for|of|from|with|by|and|or|but|,|.|that|which|who|is|are|was|were|will|would|can|could|should|may|might|must)$/.test(nx2)){chunk2.push(words[i+2]);i+=3;}else{i+=2;}}else{i+=2;}
-      chunks.push(chunk2.join(' '));
-    } else if(/^(is|are|was|were|be|been|being|have|has|had|will|would|shall|should|may|might|must|can|could|do|does|did|not|never|also|often|usually|always|sometimes)$/.test(wl)){
-      var chunk3=[w];if(i+1<words.length) chunk3.push(words[i+1]);i+=2;
-      chunks.push(chunk3.join(' '));
-    } else {
-      if(i+1<words.length){var nx3=words[i+1].toLowerCase().replace(/[.,!?;:'"()]/g,'');
-        if(/(?:ly|fully|lessly|ingly)$/.test(nx3)||/^(very|quite|rather|extremely|highly|deeply|truly|really|absolutely|completely|totally)$/.test(nx3)){chunks.push(w+' '+words[i+1]);i+=2;}else{chunks.push(w);i++;}}else{chunks.push(w);i++;}
-    }
-  }
-  if(chunks.length<3){chunks=[];for(var j=0;j<words.length;j+=2){if(j+1<words.length)chunks.push(words[j]+' '+words[j+1]);else chunks.push(words[j]);}}
-  return chunks;
+function toggleSub(btn){
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
 }
-
-function makeScramble2Card(w,idx,div){
-  var word=w[0],pos=w[1],ko=w[2],ex=w[3];
-  var koSent2=KO_SENT[ex]||'';
-  var sd=document.createElement('div');
-  var swl=document.createElement('div');
-  swl.style.cssText='font-size:13px;font-weight:700;color:var(--acc);margin-bottom:4px;';
-  swl.textContent=word+' ('+pos+')';
-  sd.appendChild(swl);
-  var swk=document.createElement('div');
-  swk.style.cssText='font-size:12px;margin-bottom:.75rem;line-height:1.6;';
-  swk.innerHTML='&#127472;&#127479; <span style="color:#1E6B3C;font-weight:600;">'+(koSent2||ko)+'</span>';
-  sd.appendChild(swk);
-  var legend=document.createElement('div');
-  legend.style.cssText='display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.75rem;';
-  Object.keys(POS_COLORS).forEach(function(k){
-    var c=POS_COLORS[k];
-    var tag=document.createElement('span');
-    tag.style.cssText='font-size:10px;padding:2px 8px;border-radius:10px;border:1.5px solid '+c.border+';background:'+c.bg+';color:'+c.color+';font-weight:700;';
-    tag.textContent=c.label||k;
-    legend.appendChild(tag);
-  });
-  sd.appendChild(legend);
-  var sInstr=document.createElement('div');
-  sInstr.style.cssText='font-size:11px;color:var(--ink3);margin-bottom:.6rem;';
-  sInstr.textContent='Words are colour-coded by part of speech. Click to build the sentence.';
-  sd.appendChild(sInstr);
-  var words_arr=ex.split(' ');
-  var shuffled=shuffle(words_arr.slice());
-  var safety=0;while(shuffled.join(' ')===ex&&safety<15){shuffled=shuffle(words_arr.slice());safety++;}
-  var bankTitle2=document.createElement('div');
-  bankTitle2.style.cssText='font-size:11px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;';
-  bankTitle2.textContent='Word Bank';sd.appendChild(bankTitle2);
-  var bankZone=document.createElement('div');
-  bankZone.style.cssText='min-height:50px;border:2px dashed #b0b8c4;border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;background:var(--sf);margin-bottom:.9rem;';
-  sd.appendChild(bankZone);
-  var ansTitle2=document.createElement('div');
-  ansTitle2.style.cssText='font-size:11px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;';
-  ansTitle2.textContent='Your Answer';sd.appendChild(ansTitle2);
-  var ansZone=document.createElement('div');
-  ansZone.style.cssText='min-height:50px;border:2px dashed #b0b8c4;border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;background:var(--sf);margin-bottom:.75rem;';
-  sd.appendChild(ansZone);
-  var fb=document.createElement('div');
-  fb.style.cssText='font-size:13px;font-weight:600;min-height:20px;margin-bottom:.5rem;';
-  sd.appendChild(fb);
-  var keyDiv=document.createElement('div');
-  keyDiv.style.cssText='display:none;font-size:12px;color:#1E6B3C;font-style:italic;padding:6px 10px;background:#E3F5EB;border-radius:8px;border-left:3px solid #1E6B3C;margin-bottom:.5rem;';
-  sd.appendChild(keyDiv);
-  function makeColorChip(text){
-    var posType=tagToken(text);
-    var c=POS_COLORS[posType]||POS_COLORS['other'];
-    var chip=document.createElement('span');
-    chip.style.cssText='display:inline-block;padding:6px 11px;background:'+c.bg+';border:1.5px solid '+c.border+';border-radius:20px;font-size:13px;color:'+c.color+';cursor:pointer;user-select:none;font-family:inherit;transition:all .15s;margin:2px;';
-    chip.textContent=text;
-    chip.addEventListener('click',function(){
-      if(answered[idx]!==undefined||chip.dataset.locked) return;
-      if(chip.parentElement===bankZone) ansZone.appendChild(chip);
-      else if(chip.parentElement===ansZone) bankZone.appendChild(chip);
-    });
-    return chip;
-  }
-  shuffled.forEach(function(t){bankZone.appendChild(makeColorChip(t));});
-  var btnRow=document.createElement('div');btnRow.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-top:.5rem;';
-  var checkBtn=document.createElement('button');checkBtn.textContent='Check ✓';checkBtn.className='btn btn-p';checkBtn.style.fontSize='13px';checkBtn.type='button';
-  checkBtn.addEventListener('click',function(){
-    if(answered[idx]!==undefined) return;
-    var placed=[].slice.call(ansZone.querySelectorAll('span'));
-    if(placed.length===0){fb.textContent='Move words first!';fb.style.color='var(--red)';return;}
-    var attempt=placed.map(function(c){return c.textContent;}).join(' ');
-    var ok=(attempt===ex);answered[idx]=attempt;
-    var allChips=[].slice.call(bankZone.querySelectorAll('span')).concat([].slice.call(ansZone.querySelectorAll('span')));
-    allChips.forEach(function(c){c.dataset.locked='1';c.style.cursor='default';});
-    if(ok){
-      correct++;fb.textContent='✓ Perfect!';fb.style.color='var(--grn)';
-      ansZone.style.borderColor='var(--grn)';ansZone.style.background='var(--grn-l)';
-    } else {
-      wrong++;fb.textContent='✗ Not quite — check the word order';fb.style.color='var(--red)';
-      ansZone.style.borderColor='var(--red)';ansZone.style.background='var(--red-l)';
-      keyDiv.textContent='✓ '+ex;keyDiv.style.display='block';
-    }
-    checkBtn.disabled=true;resetBtn.disabled=true;updateLive();
-    if(document.getElementById('s-rv').checked) showExpl(idx,word,ko,pos,ex);
-  });
-  var resetBtn=document.createElement('button');resetBtn.textContent='Reset ↺';resetBtn.className='btn btn-s';resetBtn.style.fontSize='13px';resetBtn.type='button';
-  resetBtn.addEventListener('click',function(){
-    if(answered[idx]!==undefined) return;
-    [].slice.call(ansZone.querySelectorAll('span')).forEach(function(c){bankZone.appendChild(c);});
-    fb.textContent='';fb.style.color='';keyDiv.style.display='none';
-    ansZone.style.borderColor='#b0b8c4';ansZone.style.background='var(--sf)';
-    bankZone.style.borderColor='#b0b8c4';bankZone.style.background='var(--sf)';
-  });
-  btnRow.appendChild(checkBtn);btnRow.appendChild(resetBtn);sd.appendChild(btnRow);div.appendChild(sd);
+function toggleYear(btn){
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
 }
-
-function makeScramble3Card(w,idx,div){
-  var word=w[0],pos=w[1],ko=w[2],ex=w[3];
-  var koSent3=KO_SENT[ex]||'';
-  var s3=document.createElement('div');
-  var swl3=document.createElement('div');
-  swl3.style.cssText='font-size:13px;font-weight:700;color:var(--acc);margin-bottom:4px;';
-  swl3.textContent=word+' ('+pos+')';s3.appendChild(swl3);
-  var swk3=document.createElement('div');
-  swk3.style.cssText='font-size:12px;margin-bottom:.75rem;line-height:1.6;';
-  swk3.innerHTML='&#127472;&#127479; <span style="color:#1E6B3C;font-weight:600;">'+(koSent3||ko)+'</span>';
-  s3.appendChild(swk3);
-  var instr3=document.createElement('div');
-  instr3.style.cssText='font-size:11px;color:var(--ink3);margin-bottom:.6rem;';
-  instr3.textContent='Click a chunk to move it. Each colour is a phrase group.';s3.appendChild(instr3);
-  var chunks3=chunkSentence(ex);
-  var shuffledChunks=chunks3.slice().sort(function(){return Math.random()-.5;});
-  var safety3=0;while(shuffledChunks.join('|')===chunks3.join('|')&&safety3<15){shuffledChunks=chunks3.slice().sort(function(){return Math.random()-.5;});safety3++;}
-  var bankT3=document.createElement('div');
-  bankT3.style.cssText='font-size:11px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;';
-  bankT3.textContent='Chunk Bank';s3.appendChild(bankT3);
-  var bank3=document.createElement('div');
-  bank3.style.cssText='min-height:54px;border:2px dashed #b0b8c4;border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;background:var(--sf);margin-bottom:.9rem;align-content:flex-start;';
-  s3.appendChild(bank3);
-  var ansT3=document.createElement('div');
-  ansT3.style.cssText='font-size:11px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;';
-  ansT3.textContent='Your Answer';s3.appendChild(ansT3);
-  var ans3=document.createElement('div');
-  ans3.style.cssText='min-height:54px;border:2px dashed #b0b8c4;border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;background:var(--sf);margin-bottom:.75rem;align-content:flex-start;';
-  s3.appendChild(ans3);
-  var fb3=document.createElement('div');fb3.style.cssText='font-size:13px;font-weight:600;min-height:20px;margin-bottom:.5rem;';s3.appendChild(fb3);
-  var key3=document.createElement('div');key3.style.cssText='display:none;font-size:12px;color:#1E6B3C;font-style:italic;padding:6px 10px;background:#E3F5EB;border-radius:8px;border-left:3px solid #1E6B3C;margin-bottom:.5rem;';s3.appendChild(key3);
-  var chunkColorMap={};chunks3.forEach(function(chunk,ci){chunkColorMap[chunk]=CHUNK_PALETTE[ci%CHUNK_PALETTE.length];});
-  function makeChunkChip(text){
-    var c=chunkColorMap[text]||CHUNK_PALETTE[0];
-    var chip=document.createElement('span');
-    chip.textContent=text;
-    chip.style.cssText='display:inline-block;padding:8px 14px;background:'+c.bg+';border:2px solid '+c.border+';border-radius:12px;font-size:13px;color:'+c.color+';cursor:pointer;user-select:none;font-family:inherit;transition:opacity .15s;font-weight:600;line-height:1.4;';
-    chip.addEventListener('click',function(){
-      if(answered[idx]!==undefined||chip.dataset.locked) return;
-      if(chip.parentElement===bank3) ans3.appendChild(chip);
-      else if(chip.parentElement===ans3) bank3.appendChild(chip);
-    });
-    return chip;
-  }
-  shuffledChunks.forEach(function(t){bank3.appendChild(makeChunkChip(t));});
-  var btnRow3=document.createElement('div');btnRow3.style.cssText='display:flex;gap:8px;flex-wrap:wrap;';
-  var chkBtn3=document.createElement('button');chkBtn3.textContent='Check ✓';chkBtn3.className='btn btn-p';chkBtn3.style.fontSize='13px';chkBtn3.type='button';
-  chkBtn3.addEventListener('click',function(){
-    if(answered[idx]!==undefined) return;
-    var placed=[].slice.call(ans3.querySelectorAll('span'));
-    if(placed.length===0){fb3.textContent='Move chunks first!';fb3.style.color='var(--red)';return;}
-    var reconstructed=placed.map(function(c){return c.textContent;}).join(' ');
-    var ok3=(reconstructed===ex);answered[idx]=reconstructed;
-    var all3=[].slice.call(bank3.querySelectorAll('span')).concat([].slice.call(ans3.querySelectorAll('span')));
-    all3.forEach(function(c){c.dataset.locked='1';c.style.cursor='default';});
-    if(ok3){correct++;fb3.textContent='✓ Perfect!';fb3.style.color='var(--grn)';ans3.style.borderColor='var(--grn)';ans3.style.background='var(--grn-l)';}
-    else{wrong++;fb3.textContent='✗ Not quite — check the chunk order';fb3.style.color='var(--red)';ans3.style.borderColor='var(--red)';ans3.style.background='var(--red-l)';key3.textContent='✓ '+ex;key3.style.display='block';}
-    chkBtn3.disabled=true;rstBtn3.disabled=true;updateLive();
-    if(document.getElementById('s-rv').checked) showExpl(idx,word,ko,pos,ex);
-  });
-  var rstBtn3=document.createElement('button');rstBtn3.textContent='Reset ↺';rstBtn3.className='btn btn-s';rstBtn3.style.fontSize='13px';rstBtn3.type='button';
-  rstBtn3.addEventListener('click',function(){
-    if(answered[idx]!==undefined) return;
-    [].slice.call(ans3.querySelectorAll('span')).forEach(function(c){bank3.appendChild(c);});
-    fb3.textContent='';fb3.style.color='';key3.style.display='none';key3.textContent='';
-    ans3.style.borderColor='#b0b8c4';ans3.style.background='var(--sf)';
-  });
-  btnRow3.appendChild(chkBtn3);btnRow3.appendChild(rstBtn3);s3.appendChild(btnRow3);div.appendChild(s3);
+function toggleSubject(btn){
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
 }
-
-// ─── REVEAL ALL ───────────────────────────────
-document.getElementById('s-reveal').addEventListener('click',function(){
-  quizWords.forEach(function(w,i){
-    if(answered[i]!==undefined) return;
-    answered[i]='revealed';
-    var card=document.getElementById('card_'+i);
-    if(!card) return;
-    card.querySelectorAll('.obtn').forEach(function(b){
-      b.disabled=true;
-      var text=b.textContent.slice(3);
-      if(text===w[2]||text===w[0]) b.classList.add('reveal');
-    });
-    var inp=document.getElementById('fi_'+i);
-    if(inp){inp.disabled=true;inp.value=w[0];inp.classList.add('reveal');}
-    showExpl(i,w[0],w[2],w[1],w[3]);
-  });
-  updateLive();
-});
-
-// ─── RESULTS ───────────────────────────────────
-document.getElementById('s-results').addEventListener('click',showScore);
-function showScore(){
-  var total=quizWords.length,done=correct+wrong;
-  var pct=done>0?Math.round(correct/done*100):0;
-  document.getElementById('s-quiz').style.display='none';
-  document.getElementById('s-score').style.display='block';
-  var emoji=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'👍':'💪';
-  var taskLabels={
-    'mc':'📚 Multiple choice 객관식',
-    'fi':'✏️ Fill in the blank',
-    'fi2':'✏️ Fill in the blank + 🇰🇷',
-    'w1':'✍️ Type 1 — Korean → English',
-    'w2':'✍️ Type 2 — Definition → English',
-    'scr':'🔀 Sentence Scramble',
-    'scr2':'🌈 Medium Scramble',
-    'scr3':'🧩 Easy Scramble — Chunks'
-  };
-  var taskEl=document.getElementById('sc-tasktype');
-  if(taskEl) taskEl.textContent=taskLabels[quizMode]||quizMode;
-  // Show selected lessons on results screen
-  var selEl=document.getElementById('sc-selection');
-  if(selEl){
-    selEl.innerHTML='';
-    LESSONS.forEach(function(lesson){
-      var selected=lesson.qs.filter(function(t){return sSel.has(t);});
-      if(selected.length===0) return;
-      var lbl=document.createElement('span');
-      lbl.style.cssText='font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;background:var(--acc);color:#fff;white-space:nowrap;';
-      lbl.textContent='📁 '+lesson.hoe;
-      selEl.appendChild(lbl);
-      selected.forEach(function(t){
-        var tag=document.createElement('span');
-        tag.style.cssText='font-size:10px;font-weight:600;padding:3px 9px;border-radius:12px;background:#E3EEF7;color:var(--acc);white-space:nowrap;';
-        tag.textContent=lesson.labels[t]||t;
-        selEl.appendChild(tag);
-      });
-    });
-  }
-  document.getElementById('sc-emoji').textContent=emoji;
-  document.getElementById('sc-pct').textContent=pct+'%';
-  var name=document.getElementById('s-name').value;
-  document.getElementById('sc-sub').textContent=(name?name+' — ':'')+correct+' / '+total+' correct';
-  var now=new Date();
-  var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var hh=now.getHours(),mm=now.getMinutes(),ss=now.getSeconds();
-  var ampm=hh>=12?'PM':'AM';hh=hh%12||12;
-  var timeStr=hh+':'+(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss+' '+ampm;
-  var dateStr=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();
-  document.getElementById('sc-datetime').textContent='📅 '+dateStr+'  ·  🕐 '+timeStr;
-  var msg,bg,color;
-  if(pct===100){msg="🌟 Perfect score! You're absolutely amazing!";bg='#FFF8E1';color='#E65100';}
-  else if(pct>=90){msg="🏆 Excellent work! You've mastered this vocabulary!";bg='#E8F5E9';color='#1B5E20';}
-  else if(pct>=80){msg="🎉 Great job! Just a little more practice!";bg='#E3F2FD';color='#0D47A1';}
-  else if(pct>=70){msg="👍 Good effort! Review the words you missed and try again!";bg='#E8EAF6';color='#1A237E';}
-  else if(pct>=50){msg="💪 Keep going! Every mistake is a chance to learn something new!";bg='#FFF3E0';color='#E65100';}
-  else if(pct>=30){msg="📖 Don't give up! Read through the word list and try again!";bg='#FCE4EC';color='#880E4F';}
-  else{msg="🌱 Every expert was once a beginner! Study the list and come back stronger!";bg='#F3E5F5';color='#4A148C';}
-  var el=document.getElementById('sc-encourage');
-  el.textContent=msg;el.style.background=bg;el.style.color=color;el.style.border='1.5px solid '+color;
-  document.getElementById('sc-grid').innerHTML=
-    '<div class="sbox"><div class="v">'+correct+'</div><div class="l">Correct ✓</div></div>'+
-    '<div class="sbox"><div class="v">'+wrong+'</div><div class="l">Wrong ✗</div></div>'+
-    '<div class="sbox"><div class="v">'+(total-done)+'</div><div class="l">Skipped</div></div>'+
-    '<div class="sbox"><div class="v">'+pct+'%</div><div class="l">Score</div></div>';
-  var rl=document.getElementById('sc-review');
-  var wrongs=[];
-  quizWords.forEach(function(w,i){
-    var a=answered[i];
-    if(a===undefined||a==='revealed') return;
-    if(a.toLowerCase()!==w[0].toLowerCase()&&a!==w[2]) wrongs.push(w);
-  });
-  if(!wrongs.length){rl.innerHTML='<p style="font-size:13px;color:var(--grn);">No wrong answers — great work! 🎉</p>';return;}
-  rl.innerHTML=wrongs.map(function(w){
-    var engdef=DEFS[w[0]]?'<span style="color:var(--acc);font-size:11px;font-style:italic;">💡 '+DEFS[w[0]]+'</span><br>':'';
-    return '<div class="ritem"><div class="rword">'+w[0]+' <span style="font-size:11px;color:var(--ink3);">'+w[1]+'</span></div>'+
-      '<div class="rans">'+engdef+'<span style="color:var(--grn);">✓ '+w[2]+'</span><br>'+
-      '<span style="color:var(--ink3);font-size:11px;font-style:italic;">'+w[3]+'</span></div></div>';
-  }).join('');
-}
-
-document.getElementById('sc-retry').addEventListener('click',function(){
-  document.getElementById('s-score').style.display='none';
-  answered={};correct=0;wrong=0;
-  if(document.getElementById('s-sh').checked) quizWords=shuffle(quizWords);
-  document.getElementById('s-quiz').style.display='block';
-  updateLive();renderQuiz();
-});
-document.getElementById('sc-new').addEventListener('click',function(){
-  document.getElementById('s-score').style.display='none';
-  document.getElementById('s-setup').style.display='block';
-});
 </script>
+
 </body>
 </html>
